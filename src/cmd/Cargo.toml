@@ -20,6 +20,10 @@ license.workspace = true
 
 
 [dependencies]
+clap = { version = "4.4.7", features = ["derive"] }
+common-base.workspace =true
+
 [[bin]]
 name = "placement-center"
 path = "src/placement-center/server.rs"
+
