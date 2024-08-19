@@ -1,4 +1,4 @@
-TARGET = robustmq
+TARGET = robustmq-geek
 BUILD_FOLD = ./build
 VERSION:=$(shell cat version.ini)
 PACKAGE_FOLD_NAME = ${TARGET}-$(VERSION)
@@ -10,9 +10,7 @@ release:
 	mkdir -p $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/bin
 	mkdir -p $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/libs
 	mkdir -p $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/config
-	cp -rf target/release/mqtt-server $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/libs 
 	cp -rf target/release/placement-center $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/libs 
-	cp -rf target/release/journal-server $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/libs 
 	cp -rf bin/* $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/bin
 	cp -rf config/* $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/config
 	chmod -R 777 $(BUILD_FOLD)/${PACKAGE_FOLD_NAME}/bin/*

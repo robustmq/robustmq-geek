@@ -7,6 +7,13 @@ name = "cmd"
 version = "0.0.1"
 
 [[package]]
+name = "common-base"
+version = "0.0.1"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "placement-center"
 version = "0.0.1"
 

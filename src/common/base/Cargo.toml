@@ -11,27 +11,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[workspace]
-members = [
-    "src/common/base",
-    "src/placement-center",
-    "src/cmd",
-    "src/protocol",
-]
 
-resolver = "2"
+[package]
+name = "common-base"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
 
-[workspace.package]
-version = "0.0.1"
-edition = "2021"
-license = "Apache-2.0"
 
-[workspace.dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-
-## workspaces members
-placement-center = { path = "src/placement-center" }
-cmd = { path = "src/cmd" }
-protocol = { path = "src/protocol" }
-common-base = { path = "src/common/base" }
+[dependencies]
+serde.workspace = true

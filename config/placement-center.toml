@@ -11,27 +11,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[workspace]
-members = [
-    "src/common/base",
-    "src/placement-center",
-    "src/cmd",
-    "src/protocol",
-]
 
-resolver = "2"
+cluster_name = "placement-test"
+node_id = 1
+addr = "127.0.0.1"
+grpc_port = 1228
+http_port = 1227
+nodes = { 1 = "127.0.0.1:1228" }
+runtime_work_threads = 100
+data_path = "/tmp/robust/placement-center/data"
+log_path = "/tmp/robust/placement-center/logs"
+log_segment_size = 1099511627776
+log_file_num = 50
+heartbeat_timeout_ms = 30000
+heartbeat_check_time_ms = 1000
 
-[workspace.package]
-version = "0.0.1"
-edition = "2021"
-license = "Apache-2.0"
-
-[workspace.dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-
-## workspaces members
-placement-center = { path = "src/placement-center" }
-cmd = { path = "src/cmd" }
-protocol = { path = "src/protocol" }
-common-base = { path = "src/common/base" }
+[rocksdb]
+max_open_files = 10000
