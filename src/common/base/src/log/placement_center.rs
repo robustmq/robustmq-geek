@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use log::info;
+
 use crate::{
     config::placement_center::placement_center_conf,
     tools::{create_fold, file_exists, read_file},
@@ -40,8 +42,26 @@ pub fn init_placement_center_log(path: String, segment_log_size: u64, log_fie_co
         }
     };
 
-    // let config = serde_yaml::from_str(content).unwrap();
-    // log4rs::init_raw_config(config).unwrap();
+    let config_content = content.replace("{$path}", &path);
+    println!("{}", config_content);
+
+    let config = match serde_yaml::from_str(&config_content) {
+        Ok(data) => data,
+        Err(e) => {
+            panic!(
+                "Failed to parse the contents of the config file {} with error message :{}",
+                conf.log.log_config,
+                e.to_string()
+            );
+        }
+    };
+
+    match log4rs::init_raw_config(config) {
+        Ok(_) => {}
+        Err(e) => {
+            panic!("{}", e.to_string());
+        }
+    }
 }
 
 // pub fn init_placement_center_log(path: String, segment_log_size: u64, log_fie_count: u32) {

@@ -29,10 +29,12 @@ license = "Apache-2.0"
 [workspace.dependencies]
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+serde_yaml = "0.9"
 toml = "0.8.19"
 log = "0.4.0"
 log4rs = "1.2.0"
 thiserror = "1.0.63"
+
 
 ## workspaces members
 placement-center = { path = "src/placement-center" }
