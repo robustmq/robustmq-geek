@@ -21,11 +21,8 @@ struct ArgsParams {
 fn main() {
     let args = ArgsParams::parse();
     init_placement_center_conf_by_path(&args.conf);
-    init_placement_center_log(
-        "/Users/bytedance/Desktop/code/robustmq-project/robustmq-geek/logs".to_string(),
-        1024 * 1024 * 1024 * 1024,
-        100,
-    );
+    init_placement_center_log();
+    
     let conf = placement_center_conf();
     info!("{:?}", conf);
     start_server();
