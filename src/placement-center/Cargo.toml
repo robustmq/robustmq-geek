@@ -20,3 +20,5 @@ license.workspace = true
 
 
 [dependencies]
+log.workspace = true
+log4rs.workspace = true

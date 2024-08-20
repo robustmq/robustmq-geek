@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
- use std::sync::OnceLock;
-use crate::config::read_file;
 use serde::Deserialize;
+use std::sync::OnceLock;
+use crate::tools::read_file;
 
 #[derive(Debug, Deserialize, Clone, Default)]
 pub struct PlacementCenterConfig {
@@ -24,6 +24,13 @@ pub struct PlacementCenterConfig {
     pub node_id: u32,
     #[serde(default = "default_grpc_port")]
     pub grpc_port: usize,
+    pub log: Log,
+}
+
+#[derive(Debug, Deserialize, Clone, Default)]
+pub struct Log {
+    pub log_config: String,
+    pub log_path: String,
 }
 
 pub fn default_node_id() -> u32 {
@@ -37,10 +44,13 @@ pub fn default_grpc_port() -> usize {
 static PLACEMENT_CENTER_CONF: OnceLock<PlacementCenterConfig> = OnceLock::new();
 
 pub fn init_placement_center_conf_by_path(config_path: &String) -> &'static PlacementCenterConfig {
-    // n.b. static items do not call [`Drop`] on program termination, so if
-    // [`DeepThought`] impls Drop, that will not be used for this instance.
     PLACEMENT_CENTER_CONF.get_or_init(|| {
-        let content = read_file(config_path);
+        let content = match read_file(config_path) {
+            Ok(data) => data,
+            Err(e) => {
+                panic!("{}", e.to_string());
+            }
+        };
         let pc_config: PlacementCenterConfig = toml::from_str(&content).unwrap();
         return pc_config;
     })

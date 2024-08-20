@@ -11,10 +11,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::{fs, path::Path};
+use std::{
+    fs,
+    path::{self, Path},
+};
 
-pub fn create_fold(fold: String) {
-    if !Path::new(&fold).exists() {
-        fs::create_dir_all(fold).unwrap();
+use crate::errors::RobustMQError;
+
+pub fn create_fold(fold: &String) -> Result<(), RobustMQError> {
+    if !Path::new(fold).exists() {
+        fs::create_dir_all(fold)?
     }
+    return Ok(());
+}
+
+pub fn file_exists(path: &String) -> bool {
+    return Path::new(path).exists();
+}
+
+pub fn read_file(path: &String) -> Result<String, RobustMQError> {
+    if !path::Path::new(path).exists() {
+        return Err(RobustMQError::CommmonError(format!(
+            "File {} does not exist",
+            path
+        )));
+    }
+
+    return Ok(fs::read_to_string(&path)?);
 }

@@ -2,6 +2,9 @@ use clap::command;
 use clap::Parser;
 use common_base::config::placement_center::init_placement_center_conf_by_path;
 use common_base::config::placement_center::placement_center_conf;
+use common_base::log::placement_center::init_placement_center_log;
+use log::info;
+use placement_center::start_server;
 
 pub const DEFAULT_PLACEMENT_CENTER_CONFIG: &str = "config/placement-center.toml";
 
@@ -18,5 +21,12 @@ struct ArgsParams {
 fn main() {
     let args = ArgsParams::parse();
     init_placement_center_conf_by_path(&args.conf);
-    println!("{:?}",placement_center_conf());
+    init_placement_center_log(
+        "/Users/bytedance/Desktop/code/robustmq-project/robustmq-geek/logs".to_string(),
+        1024 * 1024 * 1024 * 1024,
+        100,
+    );
+    let conf = placement_center_conf();
+    info!("{:?}", conf);
+    start_server();
 }

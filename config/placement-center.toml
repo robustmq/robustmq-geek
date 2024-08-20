@@ -13,3 +13,7 @@
 
 node_id = 1
 grpc_port = 1228
+
+[log]
+log_config = "./config/log/placement-center.yaml"
+log_path = "./logs"

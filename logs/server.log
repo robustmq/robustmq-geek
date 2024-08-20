@@ -1,0 +1,12 @@
+2024-08-20 11:57:41 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228 }
+2024-08-20 11:57:41 INFO server log
+2024-08-20 11:57:41 INFO start server log
+2024-08-20 12:04:11 30 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228 }
+2024-08-20 12:04:11 4 INFO server log
+2024-08-20 12:04:11 10 INFO start server log
+2024-08-20 12:04:50 src/cmd/src/placement-center/server.rs-30 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228 }
+2024-08-20 12:04:50 src/placement-center/src/server/mod.rs-4 INFO server log
+2024-08-20 12:04:50 src/placement-center/src/lib.rs-10 INFO start server log
+2024-08-20 12:07:27 src/cmd/src/placement-center/server.rs:30 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228 }
+2024-08-20 12:07:27 src/placement-center/src/server/mod.rs:4 INFO server log
+2024-08-20 12:07:27 src/placement-center/src/lib.rs:10 INFO start server log
