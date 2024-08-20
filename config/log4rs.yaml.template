@@ -37,3 +37,21 @@ root:
   appenders:
     - stdout
     - server
+
+loggers:
+  app::backend::db:
+    level: info
+  
+  placement_center::server:
+    level: info
+    appenders:
+      - stdout
+      - server
+    additive: false
+
+  placement_center::requests:
+    level: info
+    appenders:
+      - stdout
+      - requests
+    additive: false
