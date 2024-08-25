@@ -26,3 +26,5 @@ log.workspace = true
 log4rs.workspace = true
 thiserror.workspace = true
 serde_yaml.workspace = true
+serde_json.workspace = true
+axum.workspace = true

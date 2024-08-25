@@ -1,11 +1,9 @@
-use log::info;
-use requests::network;
-use server::server;
-pub mod server;
+use server::http::server::{start_http_server, HttpServerState};
+use tokio::sync::broadcast;
 pub mod requests;
+pub mod server;
 
-pub fn start_server() {
-    server();
-    network();
-    info!("start server log")
+pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
+    let state = HttpServerState::new();
+    start_http_server(state, stop_sx).await;
 }

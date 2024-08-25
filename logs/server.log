@@ -2,3 +2,19 @@
 2024-08-20 14:07:28 INFO server log
 2024-08-20 14:07:28 INFO network log
 2024-08-20 14:07:28 INFO start server log
+2024-08-23 09:59:22 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228, http_port: 1227, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 09:59:22 INFO server log
+2024-08-23 09:59:22 INFO network log
+2024-08-23 09:59:22 INFO start server log
+2024-08-23 09:59:29 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228, http_port: 1227, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 09:59:29 INFO server log
+2024-08-23 09:59:29 INFO network log
+2024-08-23 09:59:29 INFO start server log
+2024-08-23 10:03:43 INFO PlacementCenterConfig { node_id: 1, grpc_port: 1228, http_port: 1227, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:05:19 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:06:10 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:06:27 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:06:37 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:07:05 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:17:15 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-23 10:18:22 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }

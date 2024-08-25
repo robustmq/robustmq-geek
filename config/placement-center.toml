@@ -12,7 +12,8 @@
 # limitations under the License.
 
 node_id = 1
-grpc_port = 1228
+grpc_port = 8871
+http_port = 8971
 
 [log]
 log_config = "./config/log4rs.yaml"

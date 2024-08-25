@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+use crate::tools::read_file;
 use serde::Deserialize;
 use std::sync::OnceLock;
-use crate::tools::read_file;
 
 #[derive(Debug, Deserialize, Clone, Default)]
 pub struct PlacementCenterConfig {
@@ -24,6 +24,7 @@ pub struct PlacementCenterConfig {
     pub node_id: u32,
     #[serde(default = "default_grpc_port")]
     pub grpc_port: usize,
+    pub http_port: usize,
     pub log: Log,
 }
 
@@ -69,19 +70,21 @@ pub fn placement_center_conf() -> &'static PlacementCenterConfig {
     }
 }
 
-#[cfg(test)]
 mod tests {
-    use crate::config::placement_center::init_placement_center_conf_by_path;
-
-    use super::{placement_center_conf, PlacementCenterConfig};
+    use crate::config::placement_center::{
+        init_placement_center_conf_by_path, placement_center_conf,
+    };
 
     #[test]
-    fn meta_default() {
-        let path =
-            &"/Users/bytedance/Desktop/code/robustmq-project/robustmq/config/placement-center.toml"
-                .to_string();
-        init_placement_center_conf_by_path(path);
-        let conf: &PlacementCenterConfig = placement_center_conf();
-        assert_eq!(conf.grpc_port, 1228);
+    fn config_init_test() {
+        let path = format!(
+            "{}/../../../config/placement-center.toml",
+            env!("CARGO_MANIFEST_DIR")
+        );
+        println!("{}", path);
+        init_placement_center_conf_by_path(&path);
+        let config = placement_center_conf();
+        assert_eq!(config.node_id, 1);
+        assert_eq!(config.grpc_port, 1228);
     }
 }

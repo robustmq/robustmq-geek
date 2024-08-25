@@ -21,3 +21,4 @@ license.workspace = true
 
 [dependencies]
 serde.workspace = true
+tonic-build.workspace = true

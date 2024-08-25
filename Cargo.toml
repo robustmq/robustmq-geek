@@ -34,7 +34,10 @@ toml = "0.8.19"
 log = "0.4.0"
 log4rs = "1.2.0"
 thiserror = "1.0.63"
-
+axum = "0.7.5"
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7.9", features = ["codec"] }
+tonic-build = "0.12.1"
 
 ## workspaces members
 placement-center = { path = "src/placement-center" }

@@ -21,4 +21,9 @@ license.workspace = true
 
 [dependencies]
 log.workspace = true
+serde.workspace = true
 log4rs.workspace = true
+axum.workspace = true
+common-base.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
