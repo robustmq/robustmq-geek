@@ -69,7 +69,7 @@ pub fn placement_center_conf() -> &'static PlacementCenterConfig {
         }
     }
 }
-
+#[cfg(test)]
 mod tests {
     use crate::config::placement_center::{
         init_placement_center_conf_by_path, placement_center_conf,

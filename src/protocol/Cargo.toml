@@ -22,3 +22,6 @@ license.workspace = true
 [dependencies]
 serde.workspace = true
 tonic-build.workspace = true
+tonic.workspace = true
+prost.workspace = true
+dashmap.workspace = true

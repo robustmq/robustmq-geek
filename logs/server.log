@@ -18,3 +18,30 @@
 2024-08-23 10:07:05 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
 2024-08-23 10:17:15 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
 2024-08-23 10:18:22 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 09:47:39 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:18:26 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:20:14 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:20:14 INFO Broker Grpc Server start. port:8871
+2024-08-25 10:50:42 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:50:42 INFO Broker Grpc Server start. port:8871
+2024-08-25 10:51:06 INFO When ctrl + c is received, the service starts to stop
+2024-08-25 10:51:06 INFO HTTP Server stopped successfully
+2024-08-25 10:51:06 INFO HTTP Server stopped successfully
+2024-08-25 10:51:18 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:51:18 INFO Broker Grpc Server start. port:8871
+2024-08-25 10:51:18 INFO Broker HTTP Server start. port:8971
+2024-08-25 10:52:30 INFO When ctrl + c is received, the service starts to stop
+2024-08-25 10:52:30 INFO HTTP Server stopped successfully
+2024-08-25 10:52:30 INFO HTTP Server stopped successfully
+2024-08-25 10:52:37 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:52:37 INFO Broker HTTP Server start. port:8971
+2024-08-25 10:52:37 INFO Broker Grpc Server start. port:8871
+2024-08-25 10:52:40 INFO When ctrl + c is received, the service starts to stop
+2024-08-25 10:52:40 INFO HTTP Server stopped successfully
+2024-08-25 10:52:40 INFO HTTP Server stopped successfully
+2024-08-25 10:56:25 INFO PlacementCenterConfig { node_id: 1, grpc_port: 8871, http_port: 8971, log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-08-25 10:56:25 INFO Broker HTTP Server start. port:8971
+2024-08-25 10:56:25 INFO Broker Grpc Server start. port:8871
+2024-08-25 10:56:27 INFO When ctrl + c is received, the service starts to stop
+2024-08-25 10:56:27 INFO HTTP Server stopped successfully
+2024-08-25 10:56:27 INFO HTTP Server stopped successfully

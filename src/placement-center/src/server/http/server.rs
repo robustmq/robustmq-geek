@@ -40,6 +40,7 @@ pub async fn start_http_server(state: HttpServerState, stop_sx: broadcast::Sende
         }
     };
 
+    info!("Broker HTTP Server start. port:{}", config.http_port);
     let app = routes(state);
 
     let mut stop_rx = stop_sx.subscribe();
@@ -65,7 +66,6 @@ pub async fn start_http_server(state: HttpServerState, stop_sx: broadcast::Sende
         val = axum::serve(listener, app.clone())=>{
             match val{
                 Ok(()) => {
-                    // info!("HTTP Server started successfully, listening on port {}",config.http_port)
                 },
                 Err(e) => {
                     panic!("{}",e);
