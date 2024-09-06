@@ -21,8 +21,18 @@ use thiserror::Error;
 #[derive(Error, Debug)]
 pub enum RobustMQError {
     #[error("io error")]
-    SerdeJsonError(#[from] io::Error),
+    IOJsonError(#[from] io::Error),
 
     #[error("{0}")]
     CommmonError(String),
+
+    #[error("{0}")]
+    RocksdbError(#[from] rocksdb::Error),
+
+    #[error("No available nodes in the cluster")]
+    ClusterNoAvailableNode,
+
+
+    #[error("{0}")]
+    SerdeJsonError(#[from] serde_json::Error),
 }

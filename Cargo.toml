@@ -41,6 +41,7 @@ tonic-build = "0.12.1"
 tonic = "0.12.1"
 dashmap = "6.0.1"
 prost = "0.13.1"
+rocksdb = "0.22.0"
 
 ## workspaces members
 placement-center = { path = "src/placement-center" }
