@@ -13,7 +13,7 @@
 
 use std::{
     fs,
-    path::{self, Path},
+    path::{self, Path}, time::{SystemTime, UNIX_EPOCH},
 };
 
 use crate::errors::RobustMQError;
@@ -38,4 +38,11 @@ pub fn read_file(path: &String) -> Result<String, RobustMQError> {
     }
 
     return Ok(fs::read_to_string(&path)?);
+}
+
+pub fn now_second() -> u64 {
+    return SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_secs();
 }
