@@ -32,3 +32,9 @@ protocol.workspace = true
 dashmap.workspace = true
 serde_json.workspace = true
 rocksdb.workspace = true
+raft = { git = "https://github.com/robustmq/raft-rs",  features = ["prost-codec"], default-features = false }
+prost = "0.12.3"
+
+slog = "2"
+slog-term = "2.9.0"
+slog-async = "2.8.0"
