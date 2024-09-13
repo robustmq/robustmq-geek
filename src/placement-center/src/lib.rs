@@ -8,6 +8,7 @@ use tokio::{signal, sync::broadcast};
 pub mod requests;
 pub mod server;
 pub mod storage;
+pub mod raft;
 
 pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
     let raw_stop_sx = stop_sx.clone();
