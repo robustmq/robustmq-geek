@@ -14,28 +14,29 @@
  * limitations under the License.
  */
 
-use std::io;
+syntax = "proto3";
+package placement;
+import "common.proto";
 
-use thiserror::Error;
+service PlacementCenterService {
 
-#[derive(Error, Debug)]
-pub enum RobustMQError {
-    #[error("io error")]
-    IOJsonError(#[from] io::Error),
+  rpc SendRaftMessage(SendRaftMessageRequest) returns(SendRaftMessageReply) {}
 
-    #[error("{0}")]
-    CommmonError(String),
+  rpc SendRaftConfChange(SendRaftConfChangeRequest) returns(SendRaftConfChangeReply){}
 
-    #[error("{0}")]
-    RocksdbError(#[from] rocksdb::Error),
+}
 
-    #[error("No available nodes in the cluster")]
-    ClusterNoAvailableNode,
+message SendRaftMessageRequest{
+    bytes message = 1;
+}
 
+message SendRaftMessageReply{
 
-    #[error("{0}")]
-    SerdeJsonError(#[from] serde_json::Error),
+}
 
-    #[error("Description The interface {0} submitted logs to the commit log")]
-    RaftLogCommitTimeout(String),
+message SendRaftConfChangeRequest{
+    bytes message = 1;
+}
+
+message SendRaftConfChangeReply{
 }

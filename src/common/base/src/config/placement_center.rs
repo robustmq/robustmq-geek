@@ -16,14 +16,18 @@
 
 use crate::tools::read_file;
 use serde::Deserialize;
+use toml::Table;
 use std::sync::OnceLock;
 
 #[derive(Debug, Deserialize, Clone, Default)]
 pub struct PlacementCenterConfig {
+    pub cluster_name: String,
+    pub addr: String,
     #[serde(default = "default_node_id")]
-    pub node_id: u32,
+    pub node_id: u64,
     #[serde(default = "default_grpc_port")]
     pub grpc_port: usize,
+    pub nodes: Table,
     pub http_port: usize,
     pub data_path: String,
     pub log: Log,
@@ -35,7 +39,7 @@ pub struct Log {
     pub log_path: String,
 }
 
-pub fn default_node_id() -> u32 {
+pub fn default_node_id() -> u64 {
     1
 }
 

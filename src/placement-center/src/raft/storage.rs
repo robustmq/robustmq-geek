@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::storage::placement::raft::RaftMachineStorage;
 use log::info;
 use raft::eraftpb::HardState;
 use raft::prelude::ConfState;
@@ -26,6 +25,8 @@ use std::sync::Arc;
 use std::sync::RwLock;
 use std::sync::RwLockReadGuard;
 use std::sync::RwLockWriteGuard;
+
+use crate::storage::raft::RaftMachineStorage;
 
 pub struct RaftRocksDBStorage {
     core: Arc<RwLock<RaftMachineStorage>>,

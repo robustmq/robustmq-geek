@@ -12,8 +12,7 @@
 // limitations under the License.
 
 use bincode::serialize;
-use common_base::error::placement_center::PlacementCenterError;
-use common_base::error::common::CommonError;
+use common_base::errors::RobustMQError;
 use raft::eraftpb::ConfChange;
 use raft::eraftpb::Message as raftPreludeMessage;
 use serde::Deserialize;
@@ -120,7 +119,7 @@ impl RaftMachineApply {
         };
     }
 
-    pub async fn transfer_leader(&self, node_id: u64) -> Result<(), CommonError> {
+    pub async fn transfer_leader(&self, node_id: u64) -> Result<(), RobustMQError> {
         let (sx, rx) = oneshot::channel::<RaftResponseMesage>();
         return Ok(self
             .apply_raft_status_machine_message(
@@ -138,7 +137,7 @@ impl RaftMachineApply {
         &self,
         data: StorageData,
         action: String,
-    ) -> Result<(), CommonError> {
+    ) -> Result<(), RobustMQError> {
         let (sx, rx) = oneshot::channel::<RaftResponseMesage>();
         return Ok(self
             .apply_raft_status_machine_message(
@@ -156,7 +155,7 @@ impl RaftMachineApply {
         &self,
         message: raftPreludeMessage,
         action: String,
-    ) -> Result<(), CommonError> {
+    ) -> Result<(), RobustMQError> {
         let (sx, rx) = oneshot::channel::<RaftResponseMesage>();
         return Ok(self
             .apply_raft_status_machine_message(
@@ -174,7 +173,7 @@ impl RaftMachineApply {
         &self,
         change: ConfChange,
         action: String,
-    ) -> Result<(), CommonError> {
+    ) -> Result<(), RobustMQError> {
         let (sx, rx) = oneshot::channel::<RaftResponseMesage>();
         return Ok(self
             .apply_raft_status_machine_message(
@@ -190,10 +189,10 @@ impl RaftMachineApply {
         message: RaftMessage,
         action: String,
         rx: Receiver<RaftResponseMesage>,
-    ) -> Result<(), PlacementCenterError> {
+    ) -> Result<(), RobustMQError> {
         let _ = self.raft_status_machine_sender.send(message).await;
         if !self.wait_recv_chan_resp(rx).await {
-            return Err(PlacementCenterError::RaftLogCommitTimeout(action));
+            return Err(RobustMQError::RaftLogCommitTimeout(action));
         }
         return Ok(());
     }

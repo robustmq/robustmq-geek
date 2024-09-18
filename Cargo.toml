@@ -42,6 +42,7 @@ tonic = "0.12.1"
 dashmap = "6.0.1"
 prost = "0.13.1"
 rocksdb = "0.22.0"
+bincode = "1.3.3"
 
 ## workspaces members
 placement-center = { path = "src/placement-center" }

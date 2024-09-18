@@ -12,15 +12,14 @@
 // limitations under the License.
 
 use super::apply::{RaftMessage, RaftResponseMesage};
-use super::route::DataRoute;
 use super::storage::RaftRocksDBStorage;
+use crate::raft::broker_node::BrokerNode;
 use crate::raft::metadata::RaftGroupMetadata;
 use crate::raft::peer::PeerMessage;
-use crate::storage::placement::raft::RaftMachineStorage;
+use crate::storage::raft::RaftMachineStorage;
 use bincode::{deserialize, serialize};
 use common_base::config::placement_center::placement_center_conf;
 use log::{error, info};
-use metadata_struct::placement::broker_node::BrokerNode;
 use prost::Message as _;
 use raft::eraftpb::{
     ConfChange, ConfChangeType, Entry, EntryType, Message as raftPreludeMessage, MessageType,

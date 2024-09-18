@@ -48,7 +48,7 @@ ldb from RocksDB 9.4.0
 
 - RobustMQ-Geek项目是课程《Rust 实战 · 手写下一代云原生消息队列》的配套示例项目。
 - 《Rust 实战 · 手写下一代云原生消息队列》课程是基于开源项目 RobustMQ 的实战经验总结而来的。
-- RobustMQ 是一个基于Apache LiCENSE 2.0 的消息队列领域逇 Rust 开源项目
+- RobustMQ 是一个基于Apache LiCENSE 2.0 的消息队列领域的 Rust 开源项目
 
 所以说 RobustMQ-Geek是 RobustMQ 的子集。也就是说 RobustMQ 里面会有更完善的代码实现。感兴趣的可以查看我们主项目RobustMQ，https://github.com/robustmq/robustmq。
 

@@ -11,9 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use clients::{placement::placement::call::send_raft_message, poll::ClientPool};
 use log::{debug, error, info};
-use protocol::placement_center::generate::placement::SendRaftMessageRequest;
 use std::sync::Arc;
 use tokio::sync::mpsc;
 
