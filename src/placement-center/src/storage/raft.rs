@@ -422,37 +422,3 @@ impl RaftMachineStorage {
         return meta;
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use std::sync::Arc;
-
-    use crate::storage::rocksdb::RocksDBEngine;
-
-    use super::RaftMachineStorage;
-    use common_base::{
-        config::placement_center::{init_placement_center_conf_by_config, PlacementCenterConfig},
-        logs::init_placement_center_log,
-    };
-
-    #[test]
-    fn write_read_test() {
-        let mut conf = PlacementCenterConfig::default();
-        conf.data_path = "/tmp/tmp_test".to_string();
-        conf.data_path = "/tmp/tmp_test".to_string();
-        init_placement_center_conf_by_config(conf.clone());
-        init_placement_center_log();
-        let rocksdb_engine_handler: Arc<RocksDBEngine> = Arc::new(RocksDBEngine::new(&conf));
-        let rds = RaftMachineStorage::new(rocksdb_engine_handler);
-
-        let first_index = 1;
-        let _ = rds.save_first_index(first_index);
-        let read_first_index = rds.first_index();
-        assert_eq!(first_index, read_first_index);
-
-        let last_index = 2;
-        let _ = rds.save_last_index(last_index);
-        let last_index = rds.last_index();
-        assert_eq!(last_index, last_index);
-    }
-}

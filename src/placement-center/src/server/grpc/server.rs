@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::server::grpc::services::GrpcBrokerServices;
+use crate::server::grpc::services_kv::GrpcBrokerServices;
 use common_base::config::placement_center::placement_center_conf;
 use log::info;
 use protocol::kv::kv_service_server::KvServiceServer;

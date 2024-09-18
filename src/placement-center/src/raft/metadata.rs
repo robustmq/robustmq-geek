@@ -13,10 +13,11 @@
 
 use common_base::config::placement_center::placement_center_conf;
 use log::info;
-use metadata_struct::placement::broker_node::BrokerNode;
-use protocol::placement_center::generate::common::ClusterType;
+use protocol::common::ClusterType;
 use raft::StateRole;
 use std::collections::HashMap;
+
+use super::broker_node::BrokerNode;
 
 #[derive(PartialEq, Default, Debug, Eq, PartialOrd, Ord, Clone)]
 pub enum NodeState {
@@ -89,15 +90,6 @@ impl RaftGroupMetadata {
 
     pub fn set_role(&mut self, role: StateRole) {
         self.raft_role = role;
-    }
-
-    #[allow(dead_code)]
-    pub fn set_leader(&mut self, leader: BrokerNode) {
-        self.leader = Some(leader);
-    }
-
-    pub fn get_node_by_id(&self, id: u64) -> Option<&BrokerNode> {
-        self.peers.get(&id)
     }
 
     pub fn node_ids(&self) -> Vec<u64> {

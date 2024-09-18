@@ -21,7 +21,9 @@ mod tests {
             .out_dir("src/") // you can change the generated code's location
             .compile(
                 &[
+                    "src/common.proto",
                     "src/kv.proto",
+                    "src/placement.proto",
                     ],
                 &["src/"], // specify the root location to search proto dependencies
             )
