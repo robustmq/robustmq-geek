@@ -2,6 +2,34 @@ hello，欢迎来到极客时间课程《Rust 实战 · 手写下一代云原生
 
 这是一个运行的 Demo 项目，你下载完代码后，需要安装一下环境依赖，然后即可在本地运行。
 
+## RobustMQ-Geek 和 RobustMQ的关系
+
+- RobustMQ-Geek项目是课程《Rust 实战 · 手写下一代云原生消息队列》的配套示例项目。
+- 《Rust 实战 · 手写下一代云原生消息队列》课程是基于开源项目 RobustMQ 的实战经验总结而来的。
+- RobustMQ 是一个基于Apache LiCENSE 2.0 的消息队列领域的 Rust 开源项目
+
+所以说 RobustMQ-Geek是 RobustMQ 的子集。也就是说 RobustMQ 里面会有更完善的代码实现。感兴趣的可以查看我们主项目RobustMQ，https://github.com/robustmq/robustmq。
+
+既然你看到了这里，请给我们送个见面礼吧🌟🎒 🌟🎒 ，给 https://github.com/robustmq/robustmq 点个 Star 🌟先！
+
+## RobustMQ 期待你的参与
+欢迎各位勇士加入RobustMQ的神秘领域！🌟
+
+在这个充满魔法与代码的世界里，我们的RobustMQ还是一个初出茅庐的少年，但它拥有着无限的可能性和潜力！🚀
+
+👩‍💻👨‍💻我们诚邀各位Rust大师，一起挥舞你们的键盘之剑，用Rust的魔法编织出强大的代码之网。在这里，我们不仅共同打造一个坚不可摧的消息队列，更是在探索技术的边界，一起成长，一起进步！
+
+📚学习Rust，就像是掌握一门古老的语言，它将赋予你构建安全、高效软件的力量。让我们一起深入Rust的奥秘，解锁它的全部潜力！
+
+🌐构建基础软件，就像是在数字世界中建立一座坚不可摧的城堡。我们的目标是让RobustMQ成为连接现实与虚拟，过去与未来的桥梁。
+
+🎉所以，拿起你的装备，准备好你的代码，让我们一起踏上这场激动人心的冒险之旅吧！未来已来，让我们共同创造历史！
+
+🌈欢迎加入RobustMQ开发组，让我们一起成为改变世界的力量！🚀🌟
+
+欢迎查看🔮💻[《RobustMQ 魔法入门手册》](https://shimo.im/docs/XKq427g9v0Tj0PAN)
+
+
 ## 安装环境
 
 1. 安装 Rust 基础环境
@@ -55,29 +83,3 @@ ldb from RocksDB 9.4.0
 
 如果运行遇到问题，欢迎添加我们的微信群进行讨论。点击添加微信群：https://jsj.top/f/Dbjfwl
 
-## RobustMQ-Geek 和 RobustMQ的关系
-
-- RobustMQ-Geek项目是课程《Rust 实战 · 手写下一代云原生消息队列》的配套示例项目。
-- 《Rust 实战 · 手写下一代云原生消息队列》课程是基于开源项目 RobustMQ 的实战经验总结而来的。
-- RobustMQ 是一个基于Apache LiCENSE 2.0 的消息队列领域的 Rust 开源项目
-
-所以说 RobustMQ-Geek是 RobustMQ 的子集。也就是说 RobustMQ 里面会有更完善的代码实现。感兴趣的可以查看我们主项目RobustMQ，https://github.com/robustmq/robustmq。
-
-既然你看到了这里，请给我们送个见面礼吧🌟🎒 🌟🎒 ，给 https://github.com/robustmq/robustmq 点个 Star 🌟先！
-
-## RobustMQ 期待你的参与
-欢迎各位勇士加入RobustMQ的神秘领域！🌟
-
-在这个充满魔法与代码的世界里，我们的RobustMQ还是一个初出茅庐的少年，但它拥有着无限的可能性和潜力！🚀
-
-👩‍💻👨‍💻我们诚邀各位Rust大师，一起挥舞你们的键盘之剑，用Rust的魔法编织出强大的代码之网。在这里，我们不仅共同打造一个坚不可摧的消息队列，更是在探索技术的边界，一起成长，一起进步！
-
-📚学习Rust，就像是掌握一门古老的语言，它将赋予你构建安全、高效软件的力量。让我们一起深入Rust的奥秘，解锁它的全部潜力！
-
-🌐构建基础软件，就像是在数字世界中建立一座坚不可摧的城堡。我们的目标是让RobustMQ成为连接现实与虚拟，过去与未来的桥梁。
-
-🎉所以，拿起你的装备，准备好你的代码，让我们一起踏上这场激动人心的冒险之旅吧！未来已来，让我们共同创造历史！
-
-🌈欢迎加入RobustMQ开发组，让我们一起成为改变世界的力量！🚀🌟
-
-欢迎查看🔮💻[《RobustMQ 魔法入门手册》](https://shimo.im/docs/XKq427g9v0Tj0PAN)
