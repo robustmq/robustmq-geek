@@ -1,4 +1,5 @@
 // Copyright 2023 RobustMQ Team
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -31,12 +32,12 @@ impl DataRouteKv {
         };
     }
     pub fn set(&self, value: Vec<u8>) -> Result<(), RobustMQError> {
-        let req: SetRequest = SetRequest::decode(value.as_ref())?;
+        let req: SetRequest = SetRequest::decode(value.as_ref()).unwrap();
         return self.kv_storage.set(req.key, req.value);
     }
 
     pub fn delete(&self, value: Vec<u8>) -> Result<(), RobustMQError> {
-        let req: DeleteRequest = DeleteRequest::decode(value.as_ref())?;
+        let req: DeleteRequest = DeleteRequest::decode(value.as_ref()).unwrap();
         return self.kv_storage.delete(req.key);
     }
 }

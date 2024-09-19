@@ -1,5 +1,5 @@
-use dashmap::DashMap;
 // Copyright 2023 RobustMQ Team
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,60 +11,71 @@ use dashmap::DashMap;
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-use protocol::kv::{
-    kv_service_server::KvService, CommonReply, DeleteRequest, ExistsReply, ExistsRequest, GetReply,
-    GetRequest, SetRequest,
+
+use std::sync::Arc;
+
+use crate::raft::apply::RaftMachineApply;
+use common_base::errors::RobustMQError;
+use prost::Message;
+use protocol::placement::{
+    placement_center_service_server::PlacementCenterService, SendRaftConfChangeReply,
+    SendRaftConfChangeRequest, SendRaftMessageReply, SendRaftMessageRequest,
 };
+use raft::eraftpb::{ConfChange, Message as raftPreludeMessage};
 use tonic::{Request, Response, Status};
 
-pub struct GrpcBrokerServices {
-    data: DashMap<String, String>,
+pub struct GrpcRaftServices {
+    placement_center_storage: Arc<RaftMachineApply>,
 }
 
-impl GrpcBrokerServices {
-    pub fn new() -> Self {
-        return GrpcBrokerServices {
-            data: DashMap::with_capacity(8),
+impl GrpcRaftServices {
+    pub fn new(placement_center_storage: Arc<RaftMachineApply>) -> Self {
+        return GrpcRaftServices {
+            placement_center_storage,
         };
     }
 }
 
 #[tonic::async_trait]
-impl KvService for GrpcBrokerServices {
-    async fn set(&self, request: Request<SetRequest>) -> Result<Response<CommonReply>, Status> {
-        let req = request.into_inner();
-        self.data.insert(req.key, req.value);
-        return Ok(Response::new(CommonReply::default()));
-    }
+impl PlacementCenterService for GrpcRaftServices {
+    async fn send_raft_message(
+        &self,
+        request: Request<SendRaftMessageRequest>,
+    ) -> Result<Response<SendRaftMessageReply>, Status> {
+        let message = raftPreludeMessage::decode(request.into_inner().message.as_ref())
+            .map_err(|e| Status::invalid_argument(e.to_string()))?;
 
-    async fn get(&self, request: Request<GetRequest>) -> Result<Response<GetReply>, Status> {
-        let req = request.into_inner();
-        if let Some(data) = self.data.get(&req.key) {
-            return Ok(Response::new(GetReply {
-                value: data.value().clone(),
-            }));
+        match self
+            .placement_center_storage
+            .apply_raft_message(message, "send_raft_message".to_string())
+            .await
+        {
+            Ok(_) => return Ok(Response::new(SendRaftMessageReply::default())),
+            Err(e) => {
+                return Err(Status::cancelled(
+                    RobustMQError::RaftLogCommitTimeout(e.to_string()).to_string(),
+                ));
+            }
         }
-        return Ok(Response::new(GetReply::default()));
     }
-
-    async fn delete(
+    async fn send_raft_conf_change(
         &self,
-        request: Request<DeleteRequest>,
-    ) -> Result<Response<CommonReply>, Status> {
-        let req = request.into_inner();
-        self.data.remove(&req.key);
-        return Ok(Response::new(CommonReply::default()));
-    }
+        request: Request<SendRaftConfChangeRequest>,
+    ) -> Result<Response<SendRaftConfChangeReply>, Status> {
+        let change = ConfChange::decode(request.into_inner().message.as_ref())
+            .map_err(|e| Status::invalid_argument(e.to_string()))?;
 
-    async fn exists(
-        &self,
-        request: Request<ExistsRequest>,
-    ) -> Result<Response<ExistsReply>, Status> {
-        let req = request.into_inner();
-        return Ok(Response::new(ExistsReply {
-            flag: self.data.contains_key(&req.key),
-        }));
+        match self
+            .placement_center_storage
+            .apply_conf_raft_message(change, "send_conf_raft_message".to_string())
+            .await
+        {
+            Ok(_) => return Ok(Response::new(SendRaftConfChangeReply::default())),
+            Err(e) => {
+                return Err(Status::cancelled(
+                    RobustMQError::RaftLogCommitTimeout(e.to_string()).to_string(),
+                ));
+            }
+        }
     }
 }
-
-

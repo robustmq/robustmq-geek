@@ -6,7 +6,7 @@ action=$2
 conf=$3
 if [[ -z $mod ]]
 then
- echo "Enter the name of the component to start, for example: journal-server"
+ echo "Enter the name of the component to start, for example: placement-center"
  exit
 fi
 

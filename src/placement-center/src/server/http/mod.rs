@@ -1,4 +1,5 @@
 // Copyright 2023 RobustMQ Team
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -16,10 +17,6 @@ pub mod server;
 
 pub(crate) fn v1_path(path: &str) -> String {
     return format!("/v1{}", path);
-}
-
-pub(crate) fn path_get(path: &str) -> String {
-    return format!("{}/get", path);
 }
 
 pub(crate) fn path_create(path: &str) -> String {

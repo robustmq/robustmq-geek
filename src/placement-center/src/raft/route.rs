@@ -1,4 +1,5 @@
 // Copyright 2023 RobustMQ Team
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,7 +13,10 @@
 // limitations under the License.
 
 use bincode::deserialize;
+use common_base::errors::RobustMQError;
 use std::sync::Arc;
+use crate::storage::rocksdb::RocksDBEngine;
+use super::{apply::{StorageData, StorageDataType}, kv::DataRouteKv};
 
 pub struct DataRoute {
     route_kv: DataRouteKv,
@@ -21,16 +25,13 @@ pub struct DataRoute {
 impl DataRoute {
     pub fn new(
         rocksdb_engine_handler: Arc<RocksDBEngine>,
-        cluster_cache: Arc<PlacementCacheManager>,
-        engine_cache: Arc<JournalCacheManager>,
     ) -> DataRoute {
         let route_kv = DataRouteKv::new(rocksdb_engine_handler.clone());
-
         return DataRoute { route_kv };
     }
 
     //Receive write operations performed by the Raft state machine and write subsequent service data after Raft state machine synchronization is complete.
-    pub fn route(&self, data: Vec<u8>) -> Result<(), CommonError> {
+    pub fn route(&self, data: Vec<u8>) -> Result<(), RobustMQError> {
         let storage_data: StorageData = deserialize(data.as_ref()).unwrap();
         match storage_data.data_type {
             StorageDataType::KvSet => {
