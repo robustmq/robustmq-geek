@@ -27,13 +27,14 @@ axum.workspace = true
 common-base.workspace = true
 tokio.workspace = true
 tonic.workspace = true
+prost.workspace = true
+tonic-build.workspace = true
 tokio-util.workspace = true
 protocol.workspace = true
 dashmap.workspace = true
 serde_json.workspace = true
 rocksdb.workspace = true
 raft = { git = "https://github.com/robustmq/raft-rs",  features = ["prost-codec"], default-features = false }
-prost = "0.12.3"
 bincode.workspace = true
 slog = "2"
 slog-term = "2.9.0"

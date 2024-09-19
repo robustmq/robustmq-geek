@@ -25,3 +25,4 @@ tonic-build.workspace = true
 tonic.workspace = true
 prost.workspace = true
 dashmap.workspace = true
+tokio-util.workspace = true
