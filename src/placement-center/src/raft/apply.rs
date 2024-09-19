@@ -1,4 +1,5 @@
 // Copyright 2023 RobustMQ Team
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -54,38 +55,9 @@ pub enum RaftMessage {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum StorageDataType {
-    // Cluster
-    ClusterRegisterNode,
-    ClusterUngisterNode,
-    ClusterSetResourceConfig,
-    ClusterDeleteResourceConfig,
-    ClusterSetIdempotentData,
-    ClusterDeleteIdempotentData,
-
-    // Journal
-    JournalCreateShard,
-    JournalDeleteShard,
-    JournalCreateSegment,
-    JournalDeleteSegment,
-
     // kv
     KvSet,
     KvDelete,
-
-    // mqtt
-    MQTTCreateUser,
-    MQTTDeleteUser,
-    MQTTCreateTopic,
-    MQTTDeleteTopic,
-    MQTTSetTopicRetainMessage,
-    MQTTCreateSession,
-    MQTTDeleteSession,
-    MQTTUpdateSession,
-    MQTTSaveLastWillMessage,
-    MQTTCreateAcl,
-    MQTTDeleteAcl,
-    MQTTCreateBlacklist,
-    MQTTDeleteBlacklist,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

@@ -1,0 +1,12 @@
+Sep 19 07:26:54.532 INFO switched to configuration, config: Configuration { voters: Configuration { incoming: Configuration { voters: {1} }, outgoing: Configuration { voters: {} } }, learners: {}, learners_next: {}, auto_leave: false }, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:54.532 DEBG reset election timeout 0 -> 17 at 0, election_elapsed: 0, timeout: 17, prev_timeout: 0, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:54.532 INFO became follower at term 4, term: 4, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:54.532 INFO newRaft, peers: Configuration { incoming: Configuration { voters: {1} }, outgoing: Configuration { voters: {} } }, last term: 4, last index: 4, applied: 4, commit: 4, term: 4, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:54.532 INFO RawNode created with id 1., id: 1, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.268 INFO starting a new election, term: 4, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.269 DEBG reset election timeout 17 -> 14 at 0, election_elapsed: 0, timeout: 14, prev_timeout: 17, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.270 INFO became candidate at term 5, term: 5, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.271 DEBG reset election timeout 14 -> 19 at 0, election_elapsed: 0, timeout: 19, prev_timeout: 14, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.272 INFO became leader at term 5, term: 5, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.272 DEBG persisted index 5, raft_id: 1, tag: meta-node-id=1
+Sep 19 07:26:56.272 DEBG committing index 5, index: 5, raft_id: 1, tag: meta-node-id=1

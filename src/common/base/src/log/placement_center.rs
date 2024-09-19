@@ -28,7 +28,7 @@ pub fn init_placement_center_log() {
 
     match create_fold(&conf.log.log_path) {
         Ok(()) => {}
-        Err(e) => {
+        Err(_) => {
             panic!("Failed to initialize log directory {}", conf.log.log_path);
         }
     }

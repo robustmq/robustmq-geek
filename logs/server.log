@@ -51,3 +51,55 @@
 2024-09-06 17:08:33 INFO When ctrl + c is received, the service starts to stop
 2024-09-06 17:08:33 INFO HTTP Server stopped successfully
 2024-09-06 17:08:33 INFO HTTP Server stopped successfully
+2024-09-19 14:45:10 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19 14:45:10 INFO Broker Grpc Server start. port:8871
+2024-09-19 14:45:10 INFO Broker HTTP Server start. port:8971
+2024-09-19 14:45:14 INFO When ctrl + c is received, the service starts to stop
+2024-09-19 14:45:14 INFO HTTP Server stopped successfully
+2024-09-19 14:45:14 INFO HTTP Server stopped successfully
+2024-09-19 15:11:27 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19 15:11:27 INFO Broker HTTP Server start. port:8971
+2024-09-19 15:11:27 INFO Broker Grpc Server start. port:8871
+2024-09-19 15:11:29 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-09-19 15:11:29 INFO save hardState!!!,len:HardState { term: 1, vote: 1, commit: 0 }
+2024-09-19 15:11:29 INFO save light rd!!!,commit:1
+2024-09-19 15:11:34 INFO When ctrl + c is received, the service starts to stop
+2024-09-19 15:11:34 INFO HTTP Server stopped successfully
+2024-09-19 15:11:34 INFO HTTP Server stopped successfully
+2024-09-19 15:12:22 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19 15:12:22 INFO Broker HTTP Server start. port:8971
+2024-09-19 15:12:22 INFO Broker Grpc Server start. port:8871
+2024-09-19 15:12:24 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-09-19 15:12:24 INFO save hardState!!!,len:HardState { term: 2, vote: 1, commit: 1 }
+2024-09-19 15:12:24 INFO save light rd!!!,commit:2
+2024-09-19 15:20:14 INFO When ctrl + c is received, the service starts to stop
+2024-09-19 15:20:14 INFO HTTP Server stopped successfully
+2024-09-19 15:20:14 INFO HTTP Server stopped successfully
+2024-09-19 15:20:22 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19 15:20:22 INFO Broker HTTP Server start. port:8971
+2024-09-19 15:20:22 INFO Broker Grpc Server start. port:8871
+2024-09-19 15:20:24 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-09-19 15:20:24 INFO save hardState!!!,len:HardState { term: 3, vote: 1, commit: 2 }
+2024-09-19 15:20:24 INFO save light rd!!!,commit:3
+2024-09-19 15:20:49 INFO When ctrl + c is received, the service starts to stop
+2024-09-19 15:20:49 INFO HTTP Server stopped successfully
+2024-09-19 15:20:49 INFO HTTP Server stopped successfully
+2024-09-19 15:20:49 INFO Raft Node Process services stop.
+2024-09-19 15:20:57 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19 15:20:57 INFO Broker HTTP Server start. port:8971
+2024-09-19 15:20:57 INFO Broker Grpc Server start. port:8871
+2024-09-19 15:20:58 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-09-19 15:20:58 INFO save hardState!!!,len:HardState { term: 4, vote: 1, commit: 3 }
+2024-09-19 15:20:58 INFO save light rd!!!,commit:4
+2024-09-19 15:21:01 INFO When ctrl + c is received, the service starts to stop
+2024-09-19 15:21:01 INFO HTTP Server stopped successfully
+2024-09-19 15:21:01 INFO HTTP Server stopped successfully
+2024-09-19 15:26:54 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19 15:26:54 INFO Broker HTTP Server start. port:8971
+2024-09-19 15:26:54 INFO Broker Grpc Server start. port:8871
+2024-09-19 15:26:56 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-09-19 15:26:56 INFO save hardState!!!,len:HardState { term: 5, vote: 1, commit: 4 }
+2024-09-19 15:26:56 INFO save light rd!!!,commit:5
+2024-09-19 15:28:44 INFO When ctrl + c is received, the service starts to stop
+2024-09-19 15:28:44 INFO HTTP Server stopped successfully
+2024-09-19 15:28:44 INFO HTTP Server stopped successfully

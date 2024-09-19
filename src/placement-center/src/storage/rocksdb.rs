@@ -37,7 +37,7 @@ pub struct RocksDBEngine {
 impl RocksDBEngine {
     /// Create a rocksdb instance
     pub fn new(config: &PlacementCenterConfig) -> Self {
-        let opts: Options = Self::open_db_opts(config);
+        let opts: Options = Self::open_db_opts();
         let db_path = format!("{}/{}", config.data_path, "_storage_rocksdb");
 
         // init RocksDB
@@ -195,7 +195,7 @@ impl RocksDBEngine {
         return self.db.cf_handle(&DB_COLUMN_FAMILY_CLUSTER).unwrap();
     }
 
-    fn open_db_opts(config: &PlacementCenterConfig) -> Options {
+    fn open_db_opts() -> Options {
         let mut opts = Options::default();
         opts.create_if_missing(true);
         opts.create_missing_column_families(true);

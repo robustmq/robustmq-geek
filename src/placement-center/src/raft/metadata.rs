@@ -1,4 +1,5 @@
 // Copyright 2023 RobustMQ Team
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -17,7 +18,7 @@ use protocol::common::ClusterType;
 use raft::StateRole;
 use std::collections::HashMap;
 
-use super::broker_node::BrokerNode;
+use super::node::BrokerNode;
 
 #[derive(PartialEq, Default, Debug, Eq, PartialOrd, Ord, Clone)]
 pub enum NodeState {
@@ -70,6 +71,10 @@ impl RaftGroupMetadata {
             state: NodeState::Starting,
             peers: peers,
         }
+    }
+
+    pub fn get_node_by_id(&self, id: u64) -> Option<&BrokerNode> {
+        self.peers.get(&id)
     }
 
     // Add Meta node

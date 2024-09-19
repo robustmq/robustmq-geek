@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[package]
-name = "protocol"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
+headerPath = "Apache-2.0.txt"
 
+includes = [
+    "*.yml",
+    "*.yaml",
+    "*.toml",
+    "*.sh",
+    "*.rs",
+    "*.py",
+]
 
-[dependencies]
-serde.workspace = true
-tonic-build.workspace = true
-tonic.workspace = true
-prost.workspace = true
-dashmap.workspace = true
-tokio-util.workspace = true
+[properties]
+inceptionYear = 2023
+copyrightOwner = "RobustMQ Team"

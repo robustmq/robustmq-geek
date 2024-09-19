@@ -1,5 +1,7 @@
 hello，欢迎来到极客时间课程《Rust 实战 · 手写下一代云原生消息队列》的 Demo Project，很高兴在这里遇到你，也祝你在Rust 学习路上披荆斩棘，高歌猛进。
 
+这是一个运行的 Demo 项目，你下载完代码后，需要安装一下环境依赖，然后即可在本地运行。
+
 ## 安装环境
 
 1. 安装 Rust 基础环境
@@ -39,8 +41,17 @@ ldb from RocksDB 9.4.0
 
 打开项目后，直接打开文件：src/cmd/src/placement-center/server.rs 。点击运行main函数即可，启动成功日志如下：
 ```
-
+2024-09-19T15:12:22.945107+08:00 INFO placement_center - PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-09-19T15:12:22.959227+08:00 INFO placement_center::server::http::server - Broker HTTP Server start. port:8971
+2024-09-19T15:12:22.959334+08:00 INFO placement_center::server::grpc::server - Broker Grpc Server start. port:8871
+2024-09-19T15:12:24.696262+08:00 INFO placement_center::raft::machine - Node Raft Role changes from  【Follower】 to 【Leader】
+>> save entry index:2, value:Entry { entry_type: EntryNormal, term: 2, index: 2, data: [], context: [], sync_log: false }
+2024-09-19T15:12:24.697367+08:00 INFO placement_center::raft::machine - save hardState!!!,len:HardState { term: 2, vote: 1, commit: 1 }
+2024-09-19T15:12:24.697815+08:00 INFO placement_center::raft::machine - save light rd!!!,commit:2
+>> commit entry index:2
 ```
+
+你可以看到启动了 HTTP 和 GRPC Server，同时 Raft 集群也选举出 Leader 了
 
 如果运行遇到问题，欢迎添加我们的微信群进行讨论。点击添加微信群：https://jsj.top/f/Dbjfwl
 
