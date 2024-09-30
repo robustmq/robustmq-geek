@@ -12,22 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use super::apply::{StorageData, StorageDataType};
+use crate::storage::{kv::KvStorage, rocksdb::RocksDBEngine};
 use bincode::deserialize;
 use common_base::errors::RobustMQError;
+use prost::Message as _;
+use protocol::kv::{DeleteRequest, SetRequest};
 use std::sync::Arc;
-use crate::storage::rocksdb::RocksDBEngine;
-use super::{apply::{StorageData, StorageDataType}, kv::DataRouteKv};
 
 pub struct DataRoute {
-    route_kv: DataRouteKv,
+    rocksdb_engine_handler: Arc<RocksDBEngine>,
 }
 
 impl DataRoute {
-    pub fn new(
-        rocksdb_engine_handler: Arc<RocksDBEngine>,
-    ) -> DataRoute {
-        let route_kv = DataRouteKv::new(rocksdb_engine_handler.clone());
-        return DataRoute { route_kv };
+    pub fn new(rocksdb_engine_handler: Arc<RocksDBEngine>) -> DataRoute {
+        return DataRoute {
+            rocksdb_engine_handler,
+        };
     }
 
     //Receive write operations performed by the Raft state machine and write subsequent service data after Raft state machine synchronization is complete.
@@ -35,10 +36,14 @@ impl DataRoute {
         let storage_data: StorageData = deserialize(data.as_ref()).unwrap();
         match storage_data.data_type {
             StorageDataType::KvSet => {
-                return self.route_kv.set(storage_data.value);
+                let kv_storage = KvStorage::new(self.rocksdb_engine_handler.clone());
+                let req: SetRequest = SetRequest::decode(data.as_ref()).unwrap();
+                return kv_storage.set(req.key, req.value);
             }
             StorageDataType::KvDelete => {
-                return self.route_kv.delete(storage_data.value);
+                let kv_storage = KvStorage::new(self.rocksdb_engine_handler.clone());
+                let req: DeleteRequest = DeleteRequest::decode(data.as_ref()).unwrap();
+                return kv_storage.delete(req.key);
             }
         }
     }
