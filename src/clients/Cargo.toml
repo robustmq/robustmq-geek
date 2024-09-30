@@ -26,6 +26,7 @@ placement-center.workspace = true
 log.workspace = true
 log4rs.workspace = true
 tokio.workspace = true
-
-
-
+protocol.workspace = true
+prost.workspace = true
+mobc.workspace =true
+lazy_static.workspace =true
