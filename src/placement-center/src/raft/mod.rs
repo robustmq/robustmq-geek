@@ -34,4 +34,3 @@ pub mod peer;
 pub mod storage;
 pub mod node;
 pub mod route;
-pub mod kv;
