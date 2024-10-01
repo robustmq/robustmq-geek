@@ -12,12 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::sync::Arc;
+use std::sync::{Arc, RwLock};
 
 use crate::{
-    raft::apply::RaftMachineApply,
+    raft::{apply::RaftMachineApply, metadata::RaftGroupMetadata},
     server::grpc::{services_kv::GrpcKvServices, services_raft::GrpcRaftServices},
+    storage::rocksdb::RocksDBEngine,
 };
+use clients::poll::ClientPool;
 use common_base::config::placement_center::placement_center_conf;
 use log::info;
 use protocol::{
@@ -28,12 +30,23 @@ use tokio::{select, sync::broadcast};
 use tonic::transport::Server;
 
 pub async fn start_grpc_server(
+    client_poll: Arc<ClientPool>,
     placement_center_storage: Arc<RaftMachineApply>,
+    rocksdb_engine_handler: Arc<RocksDBEngine>,
+    placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
     stop_sx: broadcast::Sender<bool>,
 ) {
     let config = placement_center_conf();
     let server = GrpcServer::new(config.grpc_port);
-    server.start(placement_center_storage, stop_sx).await;
+    server
+        .start(
+            client_poll,
+            placement_center_storage,
+            rocksdb_engine_handler,
+            placement_cluster,
+            stop_sx,
+        )
+        .await;
 }
 
 pub struct GrpcServer {
@@ -46,12 +59,20 @@ impl GrpcServer {
     }
     pub async fn start(
         &self,
+        client_poll: Arc<ClientPool>,
         placement_center_storage: Arc<RaftMachineApply>,
+        rocksdb_engine_handler: Arc<RocksDBEngine>,
+        placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
         stop_sx: broadcast::Sender<bool>,
     ) {
         let addr = format!("0.0.0.0:{}", self.port).parse().unwrap();
         info!("Broker Grpc Server start. port:{}", self.port);
-        let kv_service_handler = GrpcKvServices::new();
+        let kv_service_handler = GrpcKvServices::new(
+            client_poll.clone(),
+            placement_center_storage.clone(),
+            rocksdb_engine_handler,
+            placement_cluster,
+        );
         let raft_service_handler = GrpcRaftServices::new(placement_center_storage);
         let mut stop_rx = stop_sx.subscribe();
         select! {

@@ -14,6 +14,7 @@
 
 use std::sync::{Arc, RwLock};
 
+use clients::poll::ClientPool;
 use common_base::config::placement_center::placement_center_conf;
 use log::info;
 use raft::{
@@ -52,17 +53,6 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
         rocksdb_engine_handler.clone(),
     )));
 
-    let raw_stop_sx = stop_sx.clone();
-    tokio::spawn(async move {
-        start_grpc_server(placement_center_storage, raw_stop_sx).await;
-    });
-
-    let raw_stop_sx = stop_sx.clone();
-    tokio::spawn(async move {
-        let state = HttpServerState::new();
-        start_http_server(state, raw_stop_sx).await;
-    });
-
     let data_route = Arc::new(RwLock::new(DataRoute::new(rocksdb_engine_handler.clone())));
 
     let mut raft: RaftMachine = RaftMachine::new(
@@ -73,6 +63,25 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
         stop_sx.subscribe(),
         raft_machine_storage.clone(),
     );
+
+    let client_poll = Arc::new(ClientPool::new(3));
+    let raw_stop_sx = stop_sx.clone();
+    tokio::spawn(async move {
+        start_grpc_server(
+            client_poll,
+            placement_center_storage,
+            rocksdb_engine_handler,
+            placement_cache,
+            raw_stop_sx,
+        )
+        .await;
+    });
+
+    let raw_stop_sx = stop_sx.clone();
+    tokio::spawn(async move {
+        let state = HttpServerState::new();
+        start_http_server(state, raw_stop_sx).await;
+    });
 
     tokio::spawn(async move {
         raft.run().await;
