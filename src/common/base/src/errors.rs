@@ -37,6 +37,9 @@ pub enum RobustMQError {
     #[error("io error")]
     IOJsonError(#[from] io::Error),
 
+    #[error("Parameter cannot be empty, parameter name: {0}")]
+    ParameterCannotBeNull(String),
+
     #[error("{0}")]
     CommmonError(String),
 

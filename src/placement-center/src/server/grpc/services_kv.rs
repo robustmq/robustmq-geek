@@ -12,7 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use dashmap::DashMap;
+use std::sync::{Arc, RwLock};
+
+use crate::{
+    raft::{
+        apply::{RaftMachineApply, StorageData, StorageDataType},
+        metadata::RaftGroupMetadata,
+    },
+    storage::{kv::KvStorage, rocksdb::RocksDBEngine},
+};
+use clients::{
+    placement::kv::call::{placement_delete, placement_set},
+    poll::ClientPool,
+};
+use common_base::errors::RobustMQError;
+use prost::Message;
 use protocol::kv::{
     kv_service_server::KvService, CommonReply, DeleteRequest, ExistsReply, ExistsRequest, GetReply,
     GetRequest, SetRequest,
@@ -20,14 +34,33 @@ use protocol::kv::{
 use tonic::{Request, Response, Status};
 
 pub struct GrpcKvServices {
-    data: DashMap<String, String>,
+    client_poll: Arc<ClientPool>,
+    placement_center_storage: Arc<RaftMachineApply>,
+    rocksdb_engine_handler: Arc<RocksDBEngine>,
+    placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
 }
 
 impl GrpcKvServices {
-    pub fn new() -> Self {
+    pub fn new(
+        client_poll: Arc<ClientPool>,
+        placement_center_storage: Arc<RaftMachineApply>,
+        rocksdb_engine_handler: Arc<RocksDBEngine>,
+        placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
+    ) -> Self {
         return GrpcKvServices {
-            data: DashMap::with_capacity(8),
+            client_poll,
+            placement_center_storage,
+            rocksdb_engine_handler,
+            placement_cluster,
         };
+    }
+
+    pub fn is_leader(&self) -> bool {
+        return self.placement_cluster.read().unwrap().is_leader();
+    }
+
+    pub fn leader_addr(&self) -> String {
+        return self.placement_cluster.read().unwrap().leader_addr();
     }
 }
 
@@ -35,18 +68,37 @@ impl GrpcKvServices {
 impl KvService for GrpcKvServices {
     async fn set(&self, request: Request<SetRequest>) -> Result<Response<CommonReply>, Status> {
         let req = request.into_inner();
-        self.data.insert(req.key, req.value);
-        return Ok(Response::new(CommonReply::default()));
-    }
 
-    async fn get(&self, request: Request<GetRequest>) -> Result<Response<GetReply>, Status> {
-        let req = request.into_inner();
-        if let Some(data) = self.data.get(&req.key) {
-            return Ok(Response::new(GetReply {
-                value: data.value().clone(),
-            }));
+        if req.key.is_empty() || req.value.is_empty() {
+            return Err(Status::cancelled(
+                RobustMQError::ParameterCannotBeNull("key or value".to_string()).to_string(),
+            ));
         }
-        return Ok(Response::new(GetReply::default()));
+
+        if !self.is_leader() {
+            let leader_addr = self.leader_addr();
+            match placement_set(self.client_poll.clone(), vec![leader_addr], req).await {
+                Ok(reply) => {
+                    return Ok(Response::new(reply));
+                }
+                Err(e) => {
+                    return Err(Status::cancelled(e.to_string()));
+                }
+            }
+        }
+
+        // Raft state machine is used to store Node data
+        let data = StorageData::new(StorageDataType::KvSet, SetRequest::encode_to_vec(&req));
+        match self
+            .placement_center_storage
+            .apply_propose_message(data, "set".to_string())
+            .await
+        {
+            Ok(_) => return Ok(Response::new(CommonReply::default())),
+            Err(e) => {
+                return Err(Status::cancelled(e.to_string()));
+            }
+        }
     }
 
     async fn delete(
@@ -54,8 +106,63 @@ impl KvService for GrpcKvServices {
         request: Request<DeleteRequest>,
     ) -> Result<Response<CommonReply>, Status> {
         let req = request.into_inner();
-        self.data.remove(&req.key);
-        return Ok(Response::new(CommonReply::default()));
+
+        if req.key.is_empty() {
+            return Err(Status::cancelled(
+                RobustMQError::ParameterCannotBeNull("key".to_string()).to_string(),
+            ));
+        }
+
+        if !self.is_leader() {
+            let leader_addr = self.leader_addr();
+            match placement_delete(self.client_poll.clone(), vec![leader_addr], req).await {
+                Ok(reply) => {
+                    return Ok(Response::new(reply));
+                }
+                Err(e) => {
+                    return Err(Status::cancelled(e.to_string()));
+                }
+            }
+        }
+
+        // Raft state machine is used to store Node data
+        let data = StorageData::new(
+            StorageDataType::KvDelete,
+            DeleteRequest::encode_to_vec(&req),
+        );
+        match self
+            .placement_center_storage
+            .apply_propose_message(data, "delete".to_string())
+            .await
+        {
+            Ok(_) => return Ok(Response::new(CommonReply::default())),
+            Err(e) => {
+                return Err(Status::cancelled(e.to_string()));
+            }
+        }
+    }
+
+    async fn get(&self, request: Request<GetRequest>) -> Result<Response<GetReply>, Status> {
+        let req = request.into_inner();
+
+        if req.key.is_empty() {
+            return Err(Status::cancelled(
+                RobustMQError::ParameterCannotBeNull("key".to_string()).to_string(),
+            ));
+        }
+
+        let kv_storage = KvStorage::new(self.rocksdb_engine_handler.clone());
+        let mut reply = GetReply::default();
+        match kv_storage.get(req.key) {
+            Ok(Some(data)) => {
+                reply.value = data;
+                return Ok(Response::new(reply));
+            }
+            Ok(None) => {}
+            Err(e) => return Err(Status::cancelled(e.to_string())),
+        }
+
+        return Ok(Response::new(reply));
     }
 
     async fn exists(
@@ -63,10 +170,21 @@ impl KvService for GrpcKvServices {
         request: Request<ExistsRequest>,
     ) -> Result<Response<ExistsReply>, Status> {
         let req = request.into_inner();
-        return Ok(Response::new(ExistsReply {
-            flag: self.data.contains_key(&req.key),
-        }));
+
+        if req.key.is_empty() {
+            return Err(Status::cancelled(
+                RobustMQError::ParameterCannotBeNull("key".to_string()).to_string(),
+            ));
+        }
+
+        let kv_storage = KvStorage::new(self.rocksdb_engine_handler.clone());
+        match kv_storage.exists(req.key) {
+            Ok(flag) => {
+                return Ok(Response::new(ExistsReply { flag }));
+            }
+            Err(e) => {
+                return Err(Status::cancelled(e.to_string()));
+            }
+        }
     }
 }
-
-

@@ -452,7 +452,6 @@ dependencies = [
  "log",
  "log4rs",
  "mobc",
- "placement-center",
  "prost 0.12.6",
  "protocol",
  "tokio",
@@ -1406,6 +1405,7 @@ version = "0.0.1"
 dependencies = [
  "axum 0.7.5",
  "bincode",
+ "clients",
  "common-base",
  "dashmap",
  "log",

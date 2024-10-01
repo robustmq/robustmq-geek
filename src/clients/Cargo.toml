@@ -22,7 +22,6 @@ license.workspace = true
 [dependencies]
 clap = { version = "4.4.7", features = ["derive"] }
 common-base.workspace = true
-placement-center.workspace = true
 log.workspace = true
 log4rs.workspace = true
 tokio.workspace = true

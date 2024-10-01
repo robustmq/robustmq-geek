@@ -19,9 +19,8 @@ use crate::{
 };
 use common_base::errors::RobustMQError;
 use prost::Message as _;
-use protocol::{
-    common::CommonReply,
-    kv::{DeleteRequest, ExistsReply, ExistsRequest, GetReply, GetRequest, SetRequest},
+use protocol::kv::{
+    CommonReply, DeleteRequest, ExistsReply, ExistsRequest, GetReply, GetRequest, SetRequest,
 };
 use std::sync::Arc;
 
