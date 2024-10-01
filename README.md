@@ -8,7 +8,7 @@ hello，欢迎来到极客时间课程《Rust 实战 · 手写下一代云原生
 - 《Rust 实战 · 手写下一代云原生消息队列》课程是基于开源项目 RobustMQ 的实战经验总结而来的。
 - RobustMQ 是一个基于Apache LiCENSE 2.0 的消息队列领域的 Rust 开源项目
 
-所以说 RobustMQ-Geek是 RobustMQ 的子集。也就是说 RobustMQ 里面会有更完善的代码实现。感兴趣的可以查看我们主项目RobustMQ，https://github.com/robustmq/robustmq。
+所以说 RobustMQ-Geek是 RobustMQ 的子集。也就是说 RobustMQ 里面会有更完善的代码实现。感兴趣的可以查看我们主项目RobustMQ，https://github.com/robustmq/robustmq 。
 
 既然你看到了这里，请给我们送个见面礼吧🌟🎒 🌟🎒 ，给 https://github.com/robustmq/robustmq 点个 Star 🌟先！
 
@@ -33,7 +33,7 @@ hello，欢迎来到极客时间课程《Rust 实战 · 手写下一代云原生
 ## 安装环境
 
 1. 安装 Rust 基础环境
-参考文档：https://course.rs/first-try/installation.html。 安装完成后，查看 rustc 和 cargo 版本，能看到版本即安装成功
+参考文档：https://course.rs/first-try/installation.html 。 安装完成后，查看 rustc 和 cargo 版本，能看到版本即安装成功
 ```
 FWR3KG21WF:~ $ rustc --version
 rustc 1.74.0 (79e9716c9 2023-11-13)
