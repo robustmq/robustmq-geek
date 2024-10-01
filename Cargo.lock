@@ -448,6 +448,7 @@ version = "0.0.1"
 dependencies = [
  "clap",
  "common-base",
+ "dashmap",
  "log",
  "log4rs",
  "mobc",
@@ -455,6 +456,7 @@ dependencies = [
  "prost 0.12.6",
  "protocol",
  "tokio",
+ "tonic",
 ]
 
 [[package]]
@@ -488,6 +490,7 @@ dependencies = [
  "serde_yaml",
  "thiserror",
  "toml",
+ "tonic",
 ]
 
 [[package]]
