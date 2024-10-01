@@ -16,7 +16,6 @@ use common_base::errors::RobustMQError;
 use mobc::Connection;
 use prost::Message;
 use protocol::kv::{CommonReply, DeleteRequest, ExistsReply, ExistsRequest, GetReply, GetRequest, SetRequest};
-
 use super::KvServiceManager;
 
 pub(crate) async fn inner_get(
