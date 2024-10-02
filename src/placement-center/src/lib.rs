@@ -34,6 +34,7 @@ use tokio::{
     sync::{broadcast, mpsc},
 };
 
+pub mod openraft;
 pub mod raft;
 pub mod requests;
 pub mod server;

@@ -14,4 +14,5 @@
 
 pub mod server;
 mod services_kv;
+mod services_openraft;
 mod services_raft;

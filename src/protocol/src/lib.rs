@@ -15,3 +15,4 @@
 pub mod kv;
 pub mod placement;
 pub mod common;
+pub mod openraft;
