@@ -16,12 +16,14 @@ use crate::{poll::ClientPool, retry_sleep_time, retry_times};
 use common_base::errors::RobustMQError;
 use kv::kv_interface_call;
 use log::error;
+use openraft::openraft_interface_call;
 use std::{sync::Arc, time::Duration};
 use tokio::time::sleep;
 
 #[derive(Clone, Debug)]
 pub enum PlacementCenterService {
     Kv,
+    OpenRaft,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -31,9 +33,15 @@ pub enum PlacementCenterInterface {
     Get,
     Delete,
     Exists,
+
+    // Open Raft
+    Vote,
+    Append,
+    Snapshot,
 }
 
 pub mod kv;
+pub mod openraft;
 
 async fn retry_call(
     service: PlacementCenterService,
@@ -49,6 +57,16 @@ async fn retry_call(
         let result = match service {
             PlacementCenterService::Kv => {
                 kv_interface_call(
+                    interface.clone(),
+                    client_poll.clone(),
+                    addr.clone(),
+                    request.clone(),
+                )
+                .await
+            }
+
+            PlacementCenterService::OpenRaft => {
+                openraft_interface_call(
                     interface.clone(),
                     client_poll.clone(),
                     addr.clone(),

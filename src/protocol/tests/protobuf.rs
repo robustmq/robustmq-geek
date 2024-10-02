@@ -24,6 +24,7 @@ mod tests {
                     "src/common.proto",
                     "src/kv.proto",
                     "src/placement.proto",
+                    "src/openraft.proto",
                     ],
                 &["src/"], // specify the root location to search proto dependencies
             )
