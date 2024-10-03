@@ -12,17 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use openraft::Raft;
 use protocol::openraft::{
     open_raft_service_server::OpenRaftService, AppendReply, AppendRequest, SnapshotReply,
     SnapshotRequest, VoteReply, VoteRequest,
 };
 use tonic::{Request, Response, Status};
 
-pub struct GrpcOpenRaftServices {}
+use crate::openraft::typeconfig::TypeConfig;
+
+pub struct GrpcOpenRaftServices {
+    raft_node: Raft<TypeConfig>,
+}
 
 impl GrpcOpenRaftServices {
-    pub fn new() -> Self {
-        return GrpcOpenRaftServices {};
+    pub fn new(raft_node: Raft<TypeConfig>) -> Self {
+        return GrpcOpenRaftServices { raft_node };
     }
 }
 

@@ -12,6 +12,12 @@ pub struct Network {
     client_poll: Arc<ClientPool>,
 }
 
+impl Network {
+    pub fn new(client_poll: Arc<ClientPool>) -> Network {
+        return Network { client_poll };
+    }
+}
+
 // NOTE: This could be implemented also on `Arc<ExampleNetwork>`, but since it's empty, implemented
 // directly.
 impl RaftNetworkFactory<TypeConfig> for Network {
