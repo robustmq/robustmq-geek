@@ -95,9 +95,9 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
         start_http_server(state, raw_stop_sx).await;
     });
 
-    tokio::spawn(async move {
-        raft.run().await;
-    });
+    // tokio::spawn(async move {
+    //     raft.run().await;
+    // });
 
     awaiting_stop(stop_sx.clone()).await;
 }

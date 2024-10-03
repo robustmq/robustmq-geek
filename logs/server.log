@@ -121,3 +121,557 @@
 2024-10-01 16:06:21 INFO When ctrl + c is received, the service starts to stop
 2024-10-01 16:06:21 INFO HTTP Server stopped successfully
 2024-10-01 16:06:21 INFO HTTP Server stopped successfully
+2024-10-03 10:12:15 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 10:12:15 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 10:12:15 INFO load membership from log: [0..0)
+2024-10-03 10:12:15 INFO load key log ids from (None,None]
+2024-10-03 10:12:15 INFO Broker HTTP Server start. port:8971
+2024-10-03 10:12:15 INFO Broker Grpc Server start. port:8871
+2024-10-03 10:12:15 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 229495, tv_nsec: 97496541 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 10:12:15 INFO startup done: id=1 target_state: Learner
+2024-10-03 10:12:15 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 10:12:15 INFO openraft::engine::engine_impl::Engine<_>::elect, new candidate: {<T1-N1:->@10:12:15.784224, last_log_id:T0-N0.0 progress:{1: false}}
+2024-10-03 10:12:15 INFO vote is changing from <T0-N0:Q> to <T1-N1:->
+2024-10-03 10:12:15 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=10:12:15.784878 resp={<T1-N1:->, last_log:None}
+2024-10-03 10:12:15 INFO openraft::engine::engine_impl::Engine<_>::handle_vote_resp resp={<T1-N1:->, last_log:None} target=1 my_vote=<T1-N1:-> my_last_log_id=T0-N0.0
+2024-10-03 10:12:15 INFO openraft::proposer::candidate::Candidate<_, _>::grant_by voting={<T1-N1:->@10:12:15.784224, last_log_id:T0-N0.0 progress:{1: true}}
+2024-10-03 10:12:15 INFO a quorum granted my vote
+2024-10-03 10:12:15 INFO openraft::engine::engine_impl::Engine<_>::establish_leader
+2024-10-03 10:12:15 INFO vote is changing from <T1-N1:-> to <T1-N1:Q>
+2024-10-03 10:12:15 INFO become leader id=1
+2024-10-03 10:12:15 INFO remove all replication
+2024-10-03 10:12:15 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 10:12:15 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=10:12:15.785304 resp={<T1-N1:Q>, last_log:None}
+2024-10-03 10:12:17 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-10-03 10:12:17 INFO save hardState!!!,len:HardState { term: 3, vote: 1, commit: 2 }
+2024-10-03 10:12:17 INFO save light rd!!!,commit:3
+2024-10-03 10:12:51 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 10:12:51 INFO HTTP Server stopped successfully
+2024-10-03 10:12:51 INFO HTTP Server stopped successfully
+2024-10-03 10:12:51 INFO Timer shutdown signal sent: Err(())
+2024-10-03 10:13:25 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 10:13:25 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 10:13:25 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 10:13:25 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 10:13:25 INFO load membership from log: [2..2)
+2024-10-03 10:13:25 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 10:13:25 INFO Broker HTTP Server start. port:8971
+2024-10-03 10:13:25 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 229564, tv_nsec: 697928916 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 10:13:25 INFO become leader id=1
+2024-10-03 10:13:25 INFO remove all replication
+2024-10-03 10:13:25 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 10:13:25 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 10:13:25 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 10:13:27 INFO Node Raft Role changes from  【Follower】 to 【Leader】
+2024-10-03 10:13:27 INFO save hardState!!!,len:HardState { term: 4, vote: 1, commit: 3 }
+2024-10-03 10:13:27 INFO save light rd!!!,commit:4
+2024-10-03 10:13:40 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 10:13:40 INFO HTTP Server stopped successfully
+2024-10-03 10:13:40 INFO Timer shutdown signal sent: Err(())
+2024-10-03 10:14:03 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 10:14:03 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 10:14:03 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 10:14:03 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 10:14:03 INFO load membership from log: [2..2)
+2024-10-03 10:14:03 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 10:14:03 INFO Broker HTTP Server start. port:8971
+2024-10-03 10:14:03 INFO Broker Grpc Server start. port:8871
+2024-10-03 10:14:03 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 229603, tv_nsec: 225896625 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 10:14:03 INFO become leader id=1
+2024-10-03 10:14:03 INFO remove all replication
+2024-10-03 10:14:03 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 10:14:03 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 10:14:03 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 10:17:40 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 10:17:40 INFO HTTP Server stopped successfully
+2024-10-03 10:17:40 INFO HTTP Server stopped successfully
+2024-10-03 10:17:40 INFO Timer shutdown signal sent: Err(())
+2024-10-03 10:17:51 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 10:17:51 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 10:17:51 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 10:17:51 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 10:17:51 INFO load membership from log: [2..2)
+2024-10-03 10:17:51 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 10:17:51 INFO Broker Grpc Server start. port:8871
+2024-10-03 10:17:51 INFO Broker HTTP Server start. port:8971
+2024-10-03 10:17:51 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 229830, tv_nsec: 789723041 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 10:17:51 INFO become leader id=1
+2024-10-03 10:17:51 INFO remove all replication
+2024-10-03 10:17:51 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 10:17:51 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 10:17:51 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 10:19:54 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 10:19:54 INFO HTTP Server stopped successfully
+2024-10-03 10:19:54 INFO HTTP Server stopped successfully
+2024-10-03 10:19:54 INFO Timer shutdown signal sent: Err(())
+2024-10-03 10:20:03 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 10:20:03 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 10:20:03 INFO load membership from log: [0..0)
+2024-10-03 10:20:03 INFO load key log ids from (None,None]
+2024-10-03 10:20:03 INFO Broker HTTP Server start. port:8971
+2024-10-03 10:20:03 INFO Broker Grpc Server start. port:8871
+2024-10-03 10:20:03 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 229962, tv_nsec: 364803791 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 10:20:03 INFO startup done: id=1 target_state: Learner
+2024-10-03 10:20:03 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 10:20:03 INFO openraft::engine::engine_impl::Engine<_>::elect, new candidate: {<T1-N1:->@10:20:03.044532, last_log_id:T0-N0.0 progress:{1: false}}
+2024-10-03 10:20:03 INFO vote is changing from <T0-N0:Q> to <T1-N1:->
+2024-10-03 10:20:03 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=10:20:03.045249 resp={<T1-N1:->, last_log:None}
+2024-10-03 10:20:03 INFO openraft::engine::engine_impl::Engine<_>::handle_vote_resp resp={<T1-N1:->, last_log:None} target=1 my_vote=<T1-N1:-> my_last_log_id=T0-N0.0
+2024-10-03 10:20:03 INFO openraft::proposer::candidate::Candidate<_, _>::grant_by voting={<T1-N1:->@10:20:03.044532, last_log_id:T0-N0.0 progress:{1: true}}
+2024-10-03 10:20:03 INFO a quorum granted my vote
+2024-10-03 10:20:03 INFO openraft::engine::engine_impl::Engine<_>::establish_leader
+2024-10-03 10:20:03 INFO vote is changing from <T1-N1:-> to <T1-N1:Q>
+2024-10-03 10:20:03 INFO become leader id=1
+2024-10-03 10:20:03 INFO remove all replication
+2024-10-03 10:20:03 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 10:20:03 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=10:20:03.045809 resp={<T1-N1:Q>, last_log:None}
+2024-10-03 11:49:51 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 11:49:51 INFO HTTP Server stopped successfully
+2024-10-03 11:49:51 INFO HTTP Server stopped successfully
+2024-10-03 11:49:51 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 11:49:51 INFO TickLoop received cancel signal, quit
+2024-10-03 11:49:51 INFO recv from rx_shutdown
+2024-10-03 11:49:51 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 11:49:51 INFO RaftCore shutdown complete
+2024-10-03 11:49:51 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 11:50:03 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 11:50:03 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 11:50:03 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 11:50:03 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 11:50:03 INFO load membership from log: [2..2)
+2024-10-03 11:50:03 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 11:50:03 INFO Broker Grpc Server start. port:8871
+2024-10-03 11:50:03 INFO Broker HTTP Server start. port:8971
+2024-10-03 11:50:03 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 232872, tv_nsec: 580848291 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 11:50:03 INFO become leader id=1
+2024-10-03 11:50:03 INFO remove all replication
+2024-10-03 11:50:03 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 11:50:03 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }, 2: Node { rpc_addr: "127.0.0.1:9912", api_addr: "127.0.0.1:9911" }, 3: Node { rpc_addr: "127.0.0.1:9922", api_addr: "127.0.0.1:9921" }}
+2024-10-03 11:50:03 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 11:51:58 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 11:51:58 INFO HTTP Server stopped successfully
+2024-10-03 11:51:58 INFO HTTP Server stopped successfully
+2024-10-03 11:51:58 INFO Timer shutdown signal sent: Err(())
+2024-10-03 11:52:08 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 11:52:08 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 11:52:08 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 11:52:08 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 11:52:08 INFO load membership from log: [2..2)
+2024-10-03 11:52:08 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 11:52:08 INFO Broker HTTP Server start. port:8971
+2024-10-03 11:52:08 INFO Broker Grpc Server start. port:8871
+2024-10-03 11:52:08 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 232997, tv_nsec: 911055458 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 11:52:08 INFO become leader id=1
+2024-10-03 11:52:08 INFO remove all replication
+2024-10-03 11:52:08 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 11:52:08 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 11:52:08 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 11:52:17 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 11:52:17 INFO HTTP Server stopped successfully
+2024-10-03 11:52:17 INFO HTTP Server stopped successfully
+2024-10-03 11:52:17 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 11:52:17 INFO recv from rx_shutdown
+2024-10-03 11:52:17 INFO TickLoop received cancel signal, quit
+2024-10-03 11:52:17 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 11:52:17 INFO RaftCore shutdown complete
+2024-10-03 11:52:17 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 12:12:54 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:12:54 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 12:12:54 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 12:12:54 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 12:12:54 INFO load membership from log: [2..2)
+2024-10-03 12:12:54 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 12:12:54 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:12:54 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:12:54 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 234243, tv_nsec: 772825583 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 12:12:54 INFO become leader id=1
+2024-10-03 12:12:54 INFO remove all replication
+2024-10-03 12:12:54 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 12:12:54 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }, 2: Node { rpc_addr: "127.0.0.1:9912", api_addr: "127.0.0.1:9911" }, 3: Node { rpc_addr: "127.0.0.1:9922", api_addr: "127.0.0.1:9921" }}
+2024-10-03 12:12:54 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 12:13:35 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 12:13:35 INFO HTTP Server stopped successfully
+2024-10-03 12:13:35 INFO HTTP Server stopped successfully
+2024-10-03 12:13:35 INFO Timer shutdown signal sent: Err(())
+2024-10-03 12:13:56 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:13:56 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 12:13:56 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 12:13:56 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 12:13:56 INFO load membership from log: [2..2)
+2024-10-03 12:13:56 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 12:13:56 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:13:56 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 234306, tv_nsec: 356078208 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 12:13:56 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:13:56 INFO become leader id=1
+2024-10-03 12:13:56 INFO remove all replication
+2024-10-03 12:13:56 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 12:13:56 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 12:13:56 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 12:14:18 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 12:14:18 INFO HTTP Server stopped successfully
+2024-10-03 12:14:18 INFO HTTP Server stopped successfully
+2024-10-03 12:14:18 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 12:14:18 INFO TickLoop received cancel signal, quit
+2024-10-03 12:14:18 INFO recv from rx_shutdown
+2024-10-03 12:14:18 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 12:14:18 INFO RaftCore shutdown complete
+2024-10-03 12:14:18 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 12:14:28 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:14:28 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 12:14:28 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 12:14:28 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 12:14:28 INFO load membership from log: [2..2)
+2024-10-03 12:14:28 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 12:14:28 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:14:28 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:14:28 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 234338, tv_nsec: 330338916 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 12:14:28 INFO become leader id=1
+2024-10-03 12:14:28 INFO remove all replication
+2024-10-03 12:14:28 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 12:15:00 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 12:15:00 INFO HTTP Server stopped successfully
+2024-10-03 12:15:00 INFO HTTP Server stopped successfully
+2024-10-03 12:15:00 INFO Timer shutdown signal sent: Err(())
+2024-10-03 12:15:09 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:15:09 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 12:15:09 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 12:15:09 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 12:15:09 INFO load membership from log: [2..2)
+2024-10-03 12:15:09 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 12:15:09 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:15:09 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:15:09 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 234379, tv_nsec: 494248458 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 12:15:09 INFO become leader id=1
+2024-10-03 12:15:09 INFO remove all replication
+2024-10-03 12:15:09 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 12:15:09 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 12:15:09 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 12:55:57 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 12:55:57 INFO HTTP Server stopped successfully
+2024-10-03 12:55:57 INFO HTTP Server stopped successfully
+2024-10-03 12:55:57 INFO Timer shutdown signal sent: Err(())
+2024-10-03 12:56:08 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:56:08 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 12:56:08 INFO load membership from log: [0..0)
+2024-10-03 12:56:08 INFO load key log ids from (None,None]
+2024-10-03 12:56:08 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:56:08 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:56:08 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 235479, tv_nsec: 333266750 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 12:56:08 INFO startup done: id=1 target_state: Learner
+2024-10-03 12:56:08 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 12:56:08 INFO openraft::engine::engine_impl::Engine<_>::elect, new candidate: {<T1-N1:->@12:56:08.404438, last_log_id:T0-N0.0 progress:{1: false}}
+2024-10-03 12:56:08 INFO vote is changing from <T0-N0:Q> to <T1-N1:->
+2024-10-03 12:56:08 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=12:56:08.405126 resp={<T1-N1:->, last_log:None}
+2024-10-03 12:56:08 INFO openraft::engine::engine_impl::Engine<_>::handle_vote_resp resp={<T1-N1:->, last_log:None} target=1 my_vote=<T1-N1:-> my_last_log_id=T0-N0.0
+2024-10-03 12:56:08 INFO openraft::proposer::candidate::Candidate<_, _>::grant_by voting={<T1-N1:->@12:56:08.404438, last_log_id:T0-N0.0 progress:{1: true}}
+2024-10-03 12:56:08 INFO a quorum granted my vote
+2024-10-03 12:56:08 INFO openraft::engine::engine_impl::Engine<_>::establish_leader
+2024-10-03 12:56:08 INFO vote is changing from <T1-N1:-> to <T1-N1:Q>
+2024-10-03 12:56:08 INFO become leader id=1
+2024-10-03 12:56:08 INFO remove all replication
+2024-10-03 12:56:08 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 12:56:08 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=12:56:08.405635 resp={<T1-N1:Q>, last_log:None}
+2024-10-03 12:56:11 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 12:56:11 INFO HTTP Server stopped successfully
+2024-10-03 12:56:11 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 12:56:11 INFO recv from rx_shutdown
+2024-10-03 12:56:11 INFO TickLoop received cancel signal, quit
+2024-10-03 12:56:11 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 12:56:11 INFO RaftCore shutdown complete
+2024-10-03 12:56:11 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 12:56:11 INFO HTTP Server stopped successfully
+2024-10-03 12:56:17 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:56:17 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 12:56:17 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 12:56:17 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 12:56:17 INFO load membership from log: [2..2)
+2024-10-03 12:56:17 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 12:56:17 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:56:17 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:56:17 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 235488, tv_nsec: 367142125 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 12:56:17 INFO become leader id=1
+2024-10-03 12:56:17 INFO remove all replication
+2024-10-03 12:56:17 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 12:56:17 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }}
+2024-10-03 12:56:17 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 12:56:34 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 12:56:34 INFO HTTP Server stopped successfully
+2024-10-03 12:56:34 INFO Timer shutdown signal sent: Err(())
+2024-10-03 12:56:34 INFO HTTP Server stopped successfully
+2024-10-03 12:56:43 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 12:56:43 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 12:56:43 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 12:56:43 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 12:56:43 INFO load membership from log: [2..2)
+2024-10-03 12:56:43 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 12:56:43 INFO Broker Grpc Server start. port:8871
+2024-10-03 12:56:43 INFO Broker HTTP Server start. port:8971
+2024-10-03 12:56:43 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 235514, tv_nsec: 429924583 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 12:56:43 INFO become leader id=1
+2024-10-03 12:56:43 INFO remove all replication
+2024-10-03 12:56:43 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 14:24:21 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 14:24:21 INFO HTTP Server stopped successfully
+2024-10-03 14:24:21 INFO HTTP Server stopped successfully
+2024-10-03 14:24:21 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 14:24:21 INFO TickLoop received cancel signal, quit
+2024-10-03 14:24:21 INFO recv from rx_shutdown
+2024-10-03 14:24:21 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 14:24:21 INFO RaftCore shutdown complete
+2024-10-03 14:24:21 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 14:24:36 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 14:24:36 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 14:24:36 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 14:24:36 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 14:24:36 INFO load membership from log: [2..2)
+2024-10-03 14:24:36 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 14:24:36 INFO Broker Grpc Server start. port:8871
+2024-10-03 14:24:36 INFO Broker HTTP Server start. port:8971
+2024-10-03 14:24:36 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 236696, tv_nsec: 268333333 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 14:24:36 INFO become leader id=1
+2024-10-03 14:24:36 INFO remove all replication
+2024-10-03 14:24:36 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 14:26:10 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 14:26:10 INFO HTTP Server stopped successfully
+2024-10-03 14:26:10 INFO HTTP Server stopped successfully
+2024-10-03 14:26:10 INFO Timer shutdown signal sent: Err(())
+2024-10-03 14:26:22 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 14:26:22 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 14:26:22 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 14:26:22 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 14:26:22 INFO load membership from log: [2..2)
+2024-10-03 14:26:22 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 14:26:22 INFO Broker HTTP Server start. port:8971
+2024-10-03 14:26:22 INFO Broker Grpc Server start. port:8871
+2024-10-03 14:26:22 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 236802, tv_nsec: 232636708 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { rpc_addr: "127.0.0.1:9902", api_addr: "127.0.0.1:9901" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 14:26:22 INFO become leader id=1
+2024-10-03 14:26:22 INFO remove all replication
+2024-10-03 14:26:22 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 14:26:34 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 14:26:34 INFO HTTP Server stopped successfully
+2024-10-03 14:26:34 INFO HTTP Server stopped successfully
+2024-10-03 14:26:34 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 14:26:34 INFO TickLoop received cancel signal, quit
+2024-10-03 14:26:34 INFO recv from rx_shutdown
+2024-10-03 14:26:34 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 14:26:34 INFO RaftCore shutdown complete
+2024-10-03 14:26:34 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 15:40:16 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:40:57 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:40:57 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 15:40:57 INFO load membership from log: [0..0)
+2024-10-03 15:40:57 INFO load key log ids from (None,None]
+2024-10-03 15:40:57 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:40:57 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:40:57 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 239245, tv_nsec: 406345250 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 15:40:57 INFO startup done: id=1 target_state: Learner
+2024-10-03 15:41:12 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 15:41:12 INFO HTTP Server stopped successfully
+2024-10-03 15:41:12 INFO HTTP Server stopped successfully
+2024-10-03 15:41:12 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 15:41:12 INFO TickLoop received cancel signal, quit
+2024-10-03 15:41:12 INFO recv from rx_shutdown
+2024-10-03 15:41:12 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 15:41:12 INFO RaftCore shutdown complete
+2024-10-03 15:41:12 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 15:41:26 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:41:26 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 15:41:26 INFO load membership from log: [0..0)
+2024-10-03 15:41:26 INFO load key log ids from (None,None]
+2024-10-03 15:41:26 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:41:26 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:41:26 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 239274, tv_nsec: 394109291 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 15:41:26 INFO startup done: id=1 target_state: Learner
+2024-10-03 15:42:14 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 15:42:14 INFO HTTP Server stopped successfully
+2024-10-03 15:42:14 INFO HTTP Server stopped successfully
+2024-10-03 15:42:14 INFO Timer shutdown signal sent: Err(())
+2024-10-03 15:42:50 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:42:50 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 15:42:50 INFO load membership from log: [0..0)
+2024-10-03 15:42:50 INFO load key log ids from (None,None]
+2024-10-03 15:42:50 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:42:50 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:42:50 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 239358, tv_nsec: 26327500 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 15:42:50 INFO startup done: id=1 target_state: Learner
+2024-10-03 15:42:50 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }}
+2024-10-03 15:42:50 INFO openraft::engine::engine_impl::Engine<_>::elect, new candidate: {<T1-N1:->@15:42:50.574339, last_log_id:T0-N0.0 progress:{1: false}}
+2024-10-03 15:42:50 INFO vote is changing from <T0-N0:Q> to <T1-N1:->
+2024-10-03 15:42:50 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=15:42:50.575001 resp={<T1-N1:->, last_log:None}
+2024-10-03 15:42:50 INFO openraft::engine::engine_impl::Engine<_>::handle_vote_resp resp={<T1-N1:->, last_log:None} target=1 my_vote=<T1-N1:-> my_last_log_id=T0-N0.0
+2024-10-03 15:42:50 INFO openraft::proposer::candidate::Candidate<_, _>::grant_by voting={<T1-N1:->@15:42:50.574339, last_log_id:T0-N0.0 progress:{1: true}}
+2024-10-03 15:42:50 INFO a quorum granted my vote
+2024-10-03 15:42:50 INFO openraft::engine::engine_impl::Engine<_>::establish_leader
+2024-10-03 15:42:50 INFO vote is changing from <T1-N1:-> to <T1-N1:Q>
+2024-10-03 15:42:50 INFO become leader id=1
+2024-10-03 15:42:50 INFO remove all replication
+2024-10-03 15:42:50 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 15:42:50 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=15:42:50.575498 resp={<T1-N1:Q>, last_log:None}
+2024-10-03 15:43:06 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 15:43:06 INFO HTTP Server stopped successfully
+2024-10-03 15:43:06 INFO HTTP Server stopped successfully
+2024-10-03 15:43:06 INFO Timer shutdown signal sent: Err(())
+2024-10-03 15:43:12 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:43:12 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 15:43:12 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 15:43:12 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 15:43:12 INFO load membership from log: [2..2)
+2024-10-03 15:43:12 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 15:43:12 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:43:12 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:43:12 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 239380, tv_nsec: 302565541 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 15:43:12 INFO become leader id=1
+2024-10-03 15:43:12 INFO remove all replication
+2024-10-03 15:43:12 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 15:43:12 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }}
+2024-10-03 15:43:12 ERROR Can not initialize last_log_id=T1-N1.1 vote=<T1-N1:Q>
+2024-10-03 15:46:31 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 15:46:31 INFO HTTP Server stopped successfully
+2024-10-03 15:46:31 INFO HTTP Server stopped successfully
+2024-10-03 15:46:31 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 15:46:31 INFO TickLoop received cancel signal, quit
+2024-10-03 15:46:31 INFO recv from rx_shutdown
+2024-10-03 15:46:31 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 15:46:31 INFO RaftCore shutdown complete
+2024-10-03 15:46:31 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 15:46:42 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:46:42 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 15:46:42 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 15:46:42 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 15:46:42 INFO load membership from log: [2..2)
+2024-10-03 15:46:42 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 15:46:42 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:46:42 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:46:42 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 239590, tv_nsec: 155826583 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 15:46:42 INFO become leader id=1
+2024-10-03 15:46:42 INFO remove all replication
+2024-10-03 15:46:42 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 15:47:23 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 15:47:23 INFO HTTP Server stopped successfully
+2024-10-03 15:47:23 INFO HTTP Server stopped successfully
+2024-10-03 15:47:23 INFO Timer shutdown signal sent: Err(())
+2024-10-03 15:48:33 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:48:33 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 15:48:33 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 15:48:33 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 15:48:33 INFO load membership from log: [2..2)
+2024-10-03 15:48:33 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 15:48:33 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:48:33 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:48:33 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 239700, tv_nsec: 698810458 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 15:48:33 INFO become leader id=1
+2024-10-03 15:48:33 INFO remove all replication
+2024-10-03 15:48:33 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 15:48:38 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 15:48:38 INFO HTTP Server stopped successfully
+2024-10-03 15:48:38 INFO HTTP Server stopped successfully
+2024-10-03 15:48:38 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 15:48:38 INFO TickLoop received cancel signal, quit
+2024-10-03 15:48:38 INFO recv from rx_shutdown
+2024-10-03 15:48:38 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 15:48:38 INFO RaftCore shutdown complete
+2024-10-03 15:48:38 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 15:55:54 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center/geek", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 15:55:54 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 15:55:54 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 15:55:54 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 15:55:54 INFO load membership from log: [2..2)
+2024-10-03 15:55:54 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 15:55:54 INFO Broker HTTP Server start. port:8971
+2024-10-03 15:55:54 INFO Broker Grpc Server start. port:8871
+2024-10-03 15:55:54 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 240141, tv_nsec: 699281833 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 15:55:54 INFO become leader id=1
+2024-10-03 15:55:54 INFO remove all replication
+2024-10-03 15:55:54 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 16:02:42 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 16:02:42 INFO HTTP Server stopped successfully
+2024-10-03 16:02:42 INFO HTTP Server stopped successfully
+2024-10-03 16:02:42 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 16:02:42 INFO TickLoop received cancel signal, quit
+2024-10-03 16:02:42 INFO recv from rx_shutdown
+2024-10-03 16:02:42 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 16:02:42 INFO RaftCore shutdown complete
+2024-10-03 16:02:42 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 16:16:14 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center-geek/geek-local", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 16:16:14 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 16:16:14 INFO load membership from log: [0..0)
+2024-10-03 16:16:14 INFO load key log ids from (None,None]
+2024-10-03 16:16:14 INFO Broker Grpc Server start. port:8871
+2024-10-03 16:16:14 INFO Broker HTTP Server start. port:8971
+2024-10-03 16:16:14 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 241167, tv_nsec: 51802166 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 16:16:14 INFO startup done: id=1 target_state: Learner
+2024-10-03 16:16:31 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 16:16:31 INFO HTTP Server stopped successfully
+2024-10-03 16:16:31 INFO HTTP Server stopped successfully
+2024-10-03 16:16:31 INFO Timer shutdown signal sent: Err(())
+2024-10-03 16:16:59 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center-geek/geek-local", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 16:16:59 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 16:16:59 INFO load membership from log: [0..0)
+2024-10-03 16:16:59 INFO load key log ids from (None,None]
+2024-10-03 16:16:59 INFO Broker HTTP Server start. port:8971
+2024-10-03 16:16:59 INFO Broker Grpc Server start. port:8871
+2024-10-03 16:16:59 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 241211, tv_nsec: 553421333 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 16:16:59 INFO startup done: id=1 target_state: Learner
+2024-10-03 16:16:59 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }}
+2024-10-03 16:16:59 INFO openraft::engine::engine_impl::Engine<_>::elect, new candidate: {<T1-N1:->@16:16:59.303692, last_log_id:T0-N0.0 progress:{1: false}}
+2024-10-03 16:16:59 INFO vote is changing from <T0-N0:Q> to <T1-N1:->
+2024-10-03 16:16:59 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=16:16:59.304273 resp={<T1-N1:->, last_log:None}
+2024-10-03 16:16:59 INFO openraft::engine::engine_impl::Engine<_>::handle_vote_resp resp={<T1-N1:->, last_log:None} target=1 my_vote=<T1-N1:-> my_last_log_id=T0-N0.0
+2024-10-03 16:16:59 INFO openraft::proposer::candidate::Candidate<_, _>::grant_by voting={<T1-N1:->@16:16:59.303692, last_log_id:T0-N0.0 progress:{1: true}}
+2024-10-03 16:16:59 INFO a quorum granted my vote
+2024-10-03 16:16:59 INFO openraft::engine::engine_impl::Engine<_>::establish_leader
+2024-10-03 16:16:59 INFO vote is changing from <T1-N1:-> to <T1-N1:Q>
+2024-10-03 16:16:59 INFO become leader id=1
+2024-10-03 16:16:59 INFO remove all replication
+2024-10-03 16:16:59 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 16:16:59 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=16:16:59.304810 resp={<T1-N1:Q>, last_log:None}
+2024-10-03 16:18:22 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 16:18:22 INFO HTTP Server stopped successfully
+2024-10-03 16:18:22 INFO HTTP Server stopped successfully
+2024-10-03 16:18:22 INFO Timer shutdown signal sent: Err(())
+2024-10-03 16:18:28 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center-geek/geek-local", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 16:18:28 INFO get_initial_state vote=<T1-N1:Q> last_purged_log_id=None last_applied=None committed=T1-N1.1 last_log_id=T1-N1.1
+2024-10-03 16:18:28 INFO re-apply log [64..0) in 2 item chunks to state machine
+2024-10-03 16:18:28 INFO re-apply 2 log entries: [0, 2),
+2024-10-03 16:18:28 INFO load membership from log: [2..2)
+2024-10-03 16:18:28 INFO load key log ids from (None,T1-N1.1]
+2024-10-03 16:18:28 INFO Broker HTTP Server start. port:8971
+2024-10-03 16:18:28 INFO Broker Grpc Server start. port:8871
+2024-10-03 16:18:28 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true }, last_update: Some(Instant { tv_sec: 241300, tv_nsec: 337848083 }), lease: 0ns, lease_enabled: true }, committed: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), purged_next: 0, log_ids: LogIdList { key_log_ids: [LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }, LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} }, effective: EffectiveMembership { log_id: Some(LogId { leader_id: LeaderId { term: 0, node_id: 0 }, index: 0 }), membership: Membership { configs: [{1}], nodes: {1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }} }, voter_ids: {1} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), submitted: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })), flushed: Some(Log(LogIOId { committed_vote: CommittedVote { vote: Vote { leader_id: LeaderId { term: 1, node_id: 1 }, committed: true } }, log_id: None })) }, applied: Some(LogId { leader_id: LeaderId { term: 1, node_id: 1 }, index: 1 }), snapshot: None, purged: None }, purge_upto: None }, is_leader: true, is_voter: true
+2024-10-03 16:18:28 INFO become leader id=1
+2024-10-03 16:18:28 INFO remove all replication
+2024-10-03 16:18:28 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 16:18:38 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 16:18:38 INFO HTTP Server stopped successfully
+2024-10-03 16:18:38 INFO Timer shutdown signal sent: Ok(())
+2024-10-03 16:18:38 INFO recv from rx_shutdown
+2024-10-03 16:18:38 ERROR error reporting metrics error=watch channel closed id=1
+2024-10-03 16:18:38 INFO RaftCore shutdown complete
+2024-10-03 16:18:38 INFO openraft::core::sm::worker::Worker<_, _, _>::worker_loop: rx closed, state machine worker quit
+2024-10-03 16:18:38 INFO HTTP Server stopped successfully
+2024-10-03 16:18:38 INFO TickLoop received cancel signal, quit
+2024-10-03 17:05:57 INFO PlacementCenterConfig { cluster_name: "placement-test", addr: "127.0.0.1", node_id: 1, grpc_port: 8871, nodes: {"1": String("127.0.0.1:1228")}, http_port: 8971, data_path: "/tmp/placement-center-geek/geek-local", log: Log { log_config: "./config/log4rs.yaml", log_path: "./logs" } }
+2024-10-03 17:05:57 INFO get_initial_state vote=<T0-N0:-> last_purged_log_id=None last_applied=None committed=None last_log_id=None
+2024-10-03 17:05:57 INFO load membership from log: [0..0)
+2024-10-03 17:05:57 INFO load key log ids from (None,None]
+2024-10-03 17:05:57 INFO Broker HTTP Server start. port:8971
+2024-10-03 17:05:57 INFO Broker Grpc Server start. port:8871
+2024-10-03 17:05:57 INFO startup begin: state: RaftState { vote: Leased { data: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false }, last_update: Some(Instant { tv_sec: 243175, tv_nsec: 478037375 }), lease: 0ns, lease_enabled: true }, committed: None, purged_next: 0, log_ids: LogIdList { key_log_ids: [] }, membership_state: MembershipState { committed: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} }, effective: EffectiveMembership { log_id: None, membership: Membership { configs: [], nodes: {} }, voter_ids: {} } }, snapshot_meta: SnapshotMeta { last_log_id: None, last_membership: StoredMembership { log_id: None, membership: Membership { configs: [], nodes: {} } }, snapshot_id: "" }, server_state: Learner, io_state: IOState { building_snapshot: false, io_progress: IOProgress { accepted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), submitted: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })), flushed: Some(Vote(NonCommittedVote { vote: Vote { leader_id: LeaderId { term: 0, node_id: 0 }, committed: false } })) }, applied: None, snapshot: None, purged: None }, purge_upto: None }, is_leader: false, is_voter: false
+2024-10-03 17:05:57 INFO startup done: id=1 target_state: Learner
+2024-10-03 17:05:57 INFO received RaftMsg::Initialize: openraft::core::raft_core::RaftCore<_, _, _>::handle_api_msg members={1: Node { node_id: 1, rpc_addr: "\"127.0.0.1:1228\"" }}
+2024-10-03 17:05:57 INFO openraft::engine::engine_impl::Engine<_>::elect, new candidate: {<T1-N1:->@17:05:57.530362, last_log_id:T0-N0.0 progress:{1: false}}
+2024-10-03 17:05:57 INFO vote is changing from <T0-N0:Q> to <T1-N1:->
+2024-10-03 17:05:57 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=17:05:57.530967 resp={<T1-N1:->, last_log:None}
+2024-10-03 17:05:57 INFO openraft::engine::engine_impl::Engine<_>::handle_vote_resp resp={<T1-N1:->, last_log:None} target=1 my_vote=<T1-N1:-> my_last_log_id=T0-N0.0
+2024-10-03 17:05:57 INFO openraft::proposer::candidate::Candidate<_, _>::grant_by voting={<T1-N1:->@17:05:57.530362, last_log_id:T0-N0.0 progress:{1: true}}
+2024-10-03 17:05:57 INFO a quorum granted my vote
+2024-10-03 17:05:57 INFO openraft::engine::engine_impl::Engine<_>::establish_leader
+2024-10-03 17:05:57 INFO vote is changing from <T1-N1:-> to <T1-N1:Q>
+2024-10-03 17:05:57 INFO become leader id=1
+2024-10-03 17:05:57 INFO remove all replication
+2024-10-03 17:05:57 INFO id=1 HeartbeatWorker are shutdown
+2024-10-03 17:05:57 INFO received Notification::VoteResponse: openraft::core::raft_core::RaftCore<_, _, _>::handle_notification now=17:05:57.531440 resp={<T1-N1:Q>, last_log:None}
+2024-10-03 17:06:04 INFO When ctrl + c is received, the service starts to stop
+2024-10-03 17:06:04 INFO HTTP Server stopped successfully
+2024-10-03 17:06:04 INFO HTTP Server stopped successfully
+2024-10-03 17:06:04 INFO Timer shutdown signal sent: Ok(())

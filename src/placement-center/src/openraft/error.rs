@@ -19,5 +19,6 @@ impl std::error::Error for ErrWrap {}
 pub fn to_error<E: std::error::Error + 'static + Clone>(
     e: RobustMQError,
 ) -> RPCError<TypeConfig, E> {
+    println!("error: {}", e.to_string());
     RPCError::Network(NetworkError::new(&e))
 }

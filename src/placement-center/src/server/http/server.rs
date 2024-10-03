@@ -90,13 +90,10 @@ pub async fn start_http_server(state: HttpServerState, stop_sx: broadcast::Sende
 fn routes(state: HttpServerState) -> Router {
     let common = Router::new()
         .route(&v1_path(&path_list(ROUTE_ROOT)), get(index))
-        .route(&v1_path(&v1_path(ROUTE_ADD_LEARNER)), post(add_leadrner))
-        .route(
-            &v1_path(&v1_path(ROUTE_CHANGE_MEMBERSHIP)),
-            post(change_membership),
-        )
-        .route(&v1_path(&v1_path(ROUTE_INIT)), post(init))
-        .route(&v1_path(&v1_path(ROUTE_METRICS)), get(metrics));
+        .route(&v1_path(ROUTE_ADD_LEARNER), post(add_leadrner))
+        .route(&v1_path(ROUTE_CHANGE_MEMBERSHIP), post(change_membership))
+        .route(&v1_path(ROUTE_INIT), post(init))
+        .route(&v1_path(ROUTE_METRICS), get(metrics));
 
     let app = Router::new().merge(common);
     return app.with_state(state);

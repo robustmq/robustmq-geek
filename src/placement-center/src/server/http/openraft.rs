@@ -12,7 +12,7 @@ pub async fn add_leadrner(State(state): State<HttpServerState>) -> String {
     let node_id = 3;
     let node = Node {
         rpc_addr: "127.0.0.0:7654".to_string(),
-        api_addr: "127.0.0.0:7656".to_string(),
+        node_id: 2,
     };
     match state.raft_node.add_learner(node_id, node, true).await {
         Ok(data) => {
@@ -41,7 +41,7 @@ pub async fn init(State(state): State<HttpServerState>) -> String {
     let node_id = 3;
     let node = Node {
         rpc_addr: "127.0.0.0:7654".to_string(),
-        api_addr: "127.0.0.0:7656".to_string(),
+        node_id: 2,
     };
 
     let mut nodes = BTreeMap::new();

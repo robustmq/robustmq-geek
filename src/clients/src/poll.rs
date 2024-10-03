@@ -76,7 +76,6 @@ impl ClientPool {
     ) -> Result<Connection<OpenRaftServiceManager>, RobustMQError> {
         let module = "OpenRaftServices".to_string();
         let key = format!("{}_{}_{}", "PlacementCenter", module, addr);
-
         if !self
             .placement_center_openraft_service_pools
             .contains_key(&key)
