@@ -40,19 +40,18 @@ impl NetworkConnection {
 
 #[allow(clippy::blocks_in_conditions)]
 impl RaftNetwork<TypeConfig> for NetworkConnection {
+    
     async fn append_entries(
         &mut self,
         req: AppendEntriesRequest<TypeConfig>,
         _option: RPCOption,
     ) -> Result<AppendEntriesResponse<TypeConfig>, RPCError<TypeConfig, RaftError<TypeConfig>>>
     {
-        tracing::debug!(req = debug(&req), "append_entries");
 
         let mut c = match self.c().await {
             Ok(conn) => conn,
             Err(e) => return Err(to_error(e)),
         };
-        tracing::debug!("got connection");
 
         let value = match serialize(&req) {
             Ok(data) => data,

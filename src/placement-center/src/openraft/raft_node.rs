@@ -1,3 +1,6 @@
+use super::network::network::Network;
+use super::store::new_storage;
+use super::typeconfig::TypeConfig;
 use clients::poll::ClientPool;
 use common_base::config::placement_center::placement_center_conf;
 use log::{error, info};
@@ -9,10 +12,6 @@ use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::RwLock;
 use tokio::time::sleep;
-
-use super::network::network::Network;
-use super::store::new_storage;
-use super::typeconfig::TypeConfig;
 pub type NodeId = u64;
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq, Eq, Default)]
@@ -92,6 +91,10 @@ pub async fn start_openraft_node(raft_node: Raft<TypeConfig>) {
                 }
             }
         }
+
+        // wait learn ready
+        sleep(Duration::from_secs(10)).await;
+
         for (node_id, node) in nodes {
             if node_id == conf.node_id {
                 continue;
