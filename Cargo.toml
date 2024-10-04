@@ -49,6 +49,7 @@ mobc = "0.8.4"
 openraft = { git = "https://github.com/databendlabs/openraft.git", features = [
     "serde",
     "type-alias",
+    "loosen-follower-log-revert",
 ] }
 byteorder = "1.5.0"
 tracing = "0.1.40"

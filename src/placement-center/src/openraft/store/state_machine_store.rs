@@ -144,7 +144,7 @@ impl StateMachineStore {
     }
 
     fn store(&self) -> &ColumnFamily {
-        self.db.cf_handle("store").unwrap()
+        self.db.cf_handle("_raft_store").unwrap()
     }
 }
 

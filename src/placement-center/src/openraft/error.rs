@@ -1,7 +1,7 @@
 use std::fmt::Display;
 
 use common_base::errors::RobustMQError;
-use openraft::error::{NetworkError, RPCError};
+use openraft::error::{NetworkError, RPCError, Unreachable};
 
 use super::typeconfig::TypeConfig;
 
@@ -19,5 +19,5 @@ impl std::error::Error for ErrWrap {}
 pub fn to_error<E: std::error::Error + 'static + Clone>(
     e: RobustMQError,
 ) -> RPCError<TypeConfig, E> {
-    RPCError::Network(NetworkError::new(&e))
+    RPCError::Unreachable(Unreachable::new(&e))
 }
