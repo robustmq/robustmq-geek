@@ -17,6 +17,7 @@ use std::sync::{Arc, RwLock};
 use clients::poll::ClientPool;
 use common_base::config::placement_center::placement_center_conf;
 use log::info;
+use openraft::raft_node::{create_raft_node, start_openraft_node};
 use raft::{
     apply::{RaftMachineApply, RaftMessage},
     machine::RaftMachine,
@@ -66,10 +67,15 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
     );
 
     let client_poll = Arc::new(ClientPool::new(3));
+
+    let (openraft_node, kvs) = create_raft_node(client_poll.clone()).await;
+
     let raw_stop_sx = stop_sx.clone();
+    let tmp_openraft_node = openraft_node.clone();
     tokio::spawn(async move {
         start_grpc_server(
             client_poll,
+            tmp_openraft_node,
             placement_center_storage,
             rocksdb_engine_handler,
             placement_cache,
@@ -78,15 +84,20 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
         .await;
     });
 
+    let tmp_openraft_node = openraft_node.clone();
+    tokio::spawn(async move {
+        start_openraft_node(openraft_node).await;
+    });
+
     let raw_stop_sx = stop_sx.clone();
     tokio::spawn(async move {
-        let state = HttpServerState::new();
+        let state = HttpServerState::new(tmp_openraft_node, kvs);
         start_http_server(state, raw_stop_sx).await;
     });
 
-    tokio::spawn(async move {
-        raft.run().await;
-    });
+    // tokio::spawn(async move {
+    //     raft.run().await;
+    // });
 
     awaiting_stop(stop_sx.clone()).await;
 }

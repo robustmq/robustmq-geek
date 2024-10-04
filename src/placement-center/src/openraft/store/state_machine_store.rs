@@ -8,7 +8,7 @@ use tokio::sync::RwLock;
 
 use crate::openraft::{
     raft_node::{typ, NodeId},
-    route::{Request, Response},
+    route::{AppRequestData, AppResponseData},
     typeconfig::{SnapshotData, TypeConfig},
 };
 
@@ -144,7 +144,7 @@ impl StateMachineStore {
     }
 
     fn store(&self) -> &ColumnFamily {
-        self.db.cf_handle("store").unwrap()
+        self.db.cf_handle("_raft_store").unwrap()
     }
 }
 
@@ -161,7 +161,10 @@ impl RaftStateMachine<TypeConfig> for StateMachineStore {
         ))
     }
 
-    async fn apply<I>(&mut self, entries: I) -> Result<Vec<Response>, StorageError<TypeConfig>>
+    async fn apply<I>(
+        &mut self,
+        entries: I,
+    ) -> Result<Vec<AppResponseData>, StorageError<TypeConfig>>
     where
         I: IntoIterator<Item = typ::Entry> + OptionalSend,
         I::IntoIter: OptionalSend,
@@ -177,11 +180,15 @@ impl RaftStateMachine<TypeConfig> for StateMachineStore {
             match ent.payload {
                 EntryPayload::Blank => {}
                 EntryPayload::Normal(req) => match req {
-                    Request::Set { key, value } => {
+                    AppRequestData::Set { key, value } => {
                         resp_value = Some(value.clone());
 
                         let mut st = self.data.kvs.write().await;
                         st.insert(key, value);
+                    }
+                    AppRequestData::Delete { key } => {
+                        let mut st = self.data.kvs.write().await;
+                        st.remove(&key);
                     }
                 },
                 EntryPayload::Membership(mem) => {
@@ -189,7 +196,7 @@ impl RaftStateMachine<TypeConfig> for StateMachineStore {
                 }
             }
 
-            replies.push(Response { value: resp_value });
+            replies.push(AppResponseData { value: resp_value });
         }
         Ok(replies)
     }

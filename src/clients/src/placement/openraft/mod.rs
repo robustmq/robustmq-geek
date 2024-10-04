@@ -90,7 +90,9 @@ impl Manager for OpenRaftServiceManager {
     type Error = RobustMQError;
 
     async fn connect(&self) -> Result<Self::Connection, Self::Error> {
-        match OpenRaftServiceClient::connect(format!("http://{}", self.addr.clone())).await {
+        let mut addr = format!("http://{}", self.addr.clone());
+
+        match OpenRaftServiceClient::connect(addr.clone()).await {
             Ok(client) => {
                 return Ok(client);
             }
@@ -98,7 +100,7 @@ impl Manager for OpenRaftServiceManager {
                 return Err(RobustMQError::CommmonError(format!(
                     "{},{}",
                     err.to_string(),
-                    self.addr.clone()
+                    addr
                 )))
             }
         };

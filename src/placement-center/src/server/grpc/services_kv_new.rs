@@ -15,20 +15,14 @@
 use std::sync::{Arc, RwLock};
 
 use crate::{
-    openraft::typeconfig::TypeConfig,
-    raft::{
-        apply::{RaftMachineApply, StorageData, StorageDataType},
-        metadata::RaftGroupMetadata,
-    },
+    openraft::{route::AppRequestData, typeconfig::TypeConfig},
+    raft::{apply::RaftMachineApply, metadata::RaftGroupMetadata},
     storage::{kv::KvStorage, rocksdb::RocksDBEngine},
 };
-use clients::{
-    placement::kv::call::{placement_delete, placement_set},
-    poll::ClientPool,
-};
+use bincode::serialize;
+use clients::poll::ClientPool;
 use common_base::errors::RobustMQError;
 use openraft::Raft;
-use prost::Message;
 use protocol::kv::{
     kv_service_server::KvService, CommonReply, DeleteRequest, ExistsReply, ExistsRequest, GetReply,
     GetRequest, SetRequest,
@@ -40,6 +34,7 @@ pub struct GrpcKvServices {
     placement_center_storage: Arc<RaftMachineApply>,
     rocksdb_engine_handler: Arc<RocksDBEngine>,
     placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
+    raft_node: Raft<TypeConfig>,
 }
 
 impl GrpcKvServices {
@@ -48,21 +43,15 @@ impl GrpcKvServices {
         placement_center_storage: Arc<RaftMachineApply>,
         rocksdb_engine_handler: Arc<RocksDBEngine>,
         placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
+        raft_node: Raft<TypeConfig>,
     ) -> Self {
         return GrpcKvServices {
             client_poll,
             placement_center_storage,
             rocksdb_engine_handler,
             placement_cluster,
+            raft_node,
         };
-    }
-
-    pub fn is_leader(&self) -> bool {
-        return self.placement_cluster.read().unwrap().is_leader();
-    }
-
-    pub fn leader_addr(&self) -> String {
-        return self.placement_cluster.read().unwrap().leader_addr();
     }
 }
 
@@ -77,30 +66,19 @@ impl KvService for GrpcKvServices {
             ));
         }
 
-        if !self.is_leader() {
-            let leader_addr = self.leader_addr();
-            match placement_set(self.client_poll.clone(), vec![leader_addr], req).await {
-                Ok(reply) => {
-                    return Ok(Response::new(reply));
-                }
-                Err(e) => {
-                    return Err(Status::cancelled(e.to_string()));
-                }
-            }
-        }
+        let data = AppRequestData::Set {
+            key: "k1".to_string(),
+            value: "v1".to_string(),
+        };
 
-        // Raft state machine is used to store Node data
-        let data = StorageData::new(StorageDataType::KvSet, SetRequest::encode_to_vec(&req));
-        match self
-            .placement_center_storage
-            .apply_propose_message(data, "set".to_string())
-            .await
-        {
-            Ok(_) => return Ok(Response::new(CommonReply::default())),
+        match self.raft_node.client_write(data).await {
+            Ok(data) => {
+                return Ok(Response::new(CommonReply::default()));
+            }
             Err(e) => {
                 return Err(Status::cancelled(e.to_string()));
             }
-        }
+        };
     }
 
     async fn delete(
@@ -115,33 +93,18 @@ impl KvService for GrpcKvServices {
             ));
         }
 
-        if !self.is_leader() {
-            let leader_addr = self.leader_addr();
-            match placement_delete(self.client_poll.clone(), vec![leader_addr], req).await {
-                Ok(reply) => {
-                    return Ok(Response::new(reply));
-                }
-                Err(e) => {
-                    return Err(Status::cancelled(e.to_string()));
-                }
-            }
-        }
+        let data = AppRequestData::Delete {
+            key: "k1".to_string(),
+        };
 
-        // Raft state machine is used to store Node data
-        let data = StorageData::new(
-            StorageDataType::KvDelete,
-            DeleteRequest::encode_to_vec(&req),
-        );
-        match self
-            .placement_center_storage
-            .apply_propose_message(data, "delete".to_string())
-            .await
-        {
-            Ok(_) => return Ok(Response::new(CommonReply::default())),
+        match self.raft_node.client_write(data).await {
+            Ok(data) => {
+                return Ok(Response::new(CommonReply::default()));
+            }
             Err(e) => {
                 return Err(Status::cancelled(e.to_string()));
             }
-        }
+        };
     }
 
     async fn get(&self, request: Request<GetRequest>) -> Result<Response<GetReply>, Status> {

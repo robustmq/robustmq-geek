@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::sync::{Arc, RwLock};
 use crate::{
+    openraft::typeconfig::TypeConfig,
     raft::{apply::RaftMachineApply, metadata::RaftGroupMetadata},
     server::grpc::{
         services_kv::GrpcKvServices, services_openraft::GrpcOpenRaftServices,
@@ -24,16 +24,19 @@ use crate::{
 use clients::poll::ClientPool;
 use common_base::config::placement_center::placement_center_conf;
 use log::info;
+use openraft::Raft;
 use protocol::{
     kv::kv_service_server::KvServiceServer,
     openraft::open_raft_service_server::OpenRaftServiceServer,
     placement::placement_center_service_server::PlacementCenterServiceServer,
 };
+use std::sync::{Arc, RwLock};
 use tokio::{select, sync::broadcast};
 use tonic::transport::Server;
 
 pub async fn start_grpc_server(
     client_poll: Arc<ClientPool>,
+    raft_node: Raft<TypeConfig>,
     placement_center_storage: Arc<RaftMachineApply>,
     rocksdb_engine_handler: Arc<RocksDBEngine>,
     placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
@@ -48,6 +51,7 @@ pub async fn start_grpc_server(
             rocksdb_engine_handler,
             placement_cluster,
             stop_sx,
+            raft_node,
         )
         .await;
 }
@@ -67,6 +71,7 @@ impl GrpcServer {
         rocksdb_engine_handler: Arc<RocksDBEngine>,
         placement_cluster: Arc<RwLock<RaftGroupMetadata>>,
         stop_sx: broadcast::Sender<bool>,
+        raft_node: Raft<TypeConfig>,
     ) {
         let addr = format!("0.0.0.0:{}", self.port).parse().unwrap();
         info!("Broker Grpc Server start. port:{}", self.port);
@@ -79,7 +84,7 @@ impl GrpcServer {
         );
         let raft_service_handler = GrpcRaftServices::new(placement_center_storage);
 
-        let openraft_service_handler = GrpcOpenRaftServices::new();
+        let openraft_service_handler = GrpcOpenRaftServices::new(raft_node);
 
         let mut stop_rx = stop_sx.subscribe();
         select! {

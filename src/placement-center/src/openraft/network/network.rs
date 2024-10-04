@@ -1,4 +1,5 @@
 use clients::poll::ClientPool;
+use log::info;
 use openraft::RaftNetworkFactory;
 use std::sync::Arc;
 
@@ -12,6 +13,12 @@ pub struct Network {
     client_poll: Arc<ClientPool>,
 }
 
+impl Network {
+    pub fn new(client_poll: Arc<ClientPool>) -> Network {
+        return Network { client_poll };
+    }
+}
+
 // NOTE: This could be implemented also on `Arc<ExampleNetwork>`, but since it's empty, implemented
 // directly.
 impl RaftNetworkFactory<TypeConfig> for Network {
@@ -19,7 +26,7 @@ impl RaftNetworkFactory<TypeConfig> for Network {
 
     #[tracing::instrument(level = "debug", skip_all)]
     async fn new_client(&mut self, target: NodeId, node: &Node) -> Self::Network {
-        let addr = format!("ws://{}", node.rpc_addr);
+        let addr = format!("{}", node.rpc_addr);
         return NetworkConnection::new(addr, self.client_poll.clone(), target);
     }
 }

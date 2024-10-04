@@ -7,8 +7,10 @@ use serde::{Deserialize, Serialize};
  * You will want to add any request that can write data in all nodes here.
  */
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub enum Request {
+pub enum AppRequestData {
     Set { key: String, value: String },
+
+    Delete { key: String },
 }
 
 /**
@@ -20,6 +22,6 @@ pub enum Request {
  *
  */
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Response {
+pub struct AppResponseData {
     pub value: Option<String>,
 }

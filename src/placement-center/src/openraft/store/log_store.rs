@@ -1,13 +1,12 @@
-use std::{fmt::Debug, ops::RangeBounds, sync::Arc};
-
+use super::{id_to_bin, StorageResult};
+use crate::openraft::{raft_node::NodeId, store::bin_to_id, typeconfig::TypeConfig};
 use openraft::{
-    storage::{IOFlushed, RaftLogStorage}, AnyError, Entry, ErrorSubject, ErrorVerb, LogId, LogState, OptionalSend, RaftLogReader, StorageError, Vote
+    storage::{IOFlushed, RaftLogStorage},
+    AnyError, Entry, ErrorSubject, ErrorVerb, LogId, LogState, OptionalSend, RaftLogReader,
+    StorageError, Vote,
 };
 use rocksdb::{ColumnFamily, Direction, DB};
-
-use crate::openraft::{raft_node::NodeId, store::bin_to_id, typeconfig::TypeConfig};
-
-use super::{id_to_bin, StorageResult};
+use std::{fmt::Debug, ops::RangeBounds, sync::Arc};
 
 #[derive(Debug, Clone)]
 pub struct LogStore {
@@ -16,11 +15,11 @@ pub struct LogStore {
 
 impl LogStore {
     fn store(&self) -> &ColumnFamily {
-        self.db.cf_handle("store").unwrap()
+        self.db.cf_handle("_raft_store").unwrap()
     }
 
     fn logs(&self) -> &ColumnFamily {
-        self.db.cf_handle("logs").unwrap()
+        self.db.cf_handle("_raft_logs").unwrap()
     }
 
     fn flush(
