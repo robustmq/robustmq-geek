@@ -1,3 +1,5 @@
+use crate::raft::node;
+
 use super::network::network::Network;
 use super::store::new_storage;
 use super::typeconfig::TypeConfig;
@@ -66,56 +68,76 @@ pub async fn start_openraft_node(raft_node: Raft<TypeConfig>) {
 
     info!("Raft Nodes:{:?}", nodes);
     let init_node_id = calc_init_node(&nodes);
-
     if init_node_id == conf.node_id {
-        if let Some(local) = nodes.get(&conf.node_id) {
-            info!("Start trying to initialize node:{}", local.node_id);
-            let mut init_nodes = BTreeMap::new();
-            init_nodes.insert(local.node_id, local.clone());
-            match raft_node.is_initialized().await {
-                Ok(flag) => {
-                    info!("Whether nodes should be initialized, flag={}", flag);
-                    if !flag {
-                        match raft_node.initialize(init_nodes).await {
-                            Ok(_) => {
-                                info!("Node {} was initialized successfully", conf.node_id);
-                            }
-                            Err(e) => {
-                                panic!("openraft init fail,{}", e.to_string());
-                            }
+        match raft_node.is_initialized().await {
+            Ok(flag) => {
+                info!("Whether nodes should be initialized, flag={}", flag);
+                if !flag {
+                    match raft_node.initialize(nodes.clone()).await {
+                        Ok(_) => {
+                            info!("Node {:?} was initialized successfully", nodes);
+                        }
+                        Err(e) => {
+                            panic!("openraft init fail,{}", e.to_string());
                         }
                     }
                 }
-                Err(e) => {
-                    panic!("openraft initialized fail,{}", e.to_string());
-                }
             }
-        }
-
-        // wait learn ready
-        sleep(Duration::from_secs(10)).await;
-
-        for (node_id, node) in nodes {
-            if node_id == conf.node_id {
-                continue;
-            }
-            info!("Start adding learner node {}", node_id);
-            match raft_node.add_learner(node_id, node, true).await {
-                Ok(data) => {
-                    info!(
-                        "Learner node {} was added successfullys, res:{:?}",
-                        node_id, data
-                    );
-                }
-                Err(e) => {
-                    error!(
-                        "Failed to add the learner node, error message :{}",
-                        e.to_string()
-                    );
-                }
+            Err(e) => {
+                panic!("openraft initialized fail,{}", e.to_string());
             }
         }
     }
+
+    // if init_node_id == conf.node_id {
+    //     if let Some(local) = nodes.get(&conf.node_id) {
+    //         info!("Start trying to initialize node:{}", local.node_id);
+    //         let mut init_nodes = BTreeMap::new();
+    //         init_nodes.insert(local.node_id, local.clone());
+    //         match raft_node.is_initialized().await {
+    //             Ok(flag) => {
+    //                 info!("Whether nodes should be initialized, flag={}", flag);
+    //                 if !flag {
+    //                     match raft_node.initialize(init_nodes).await {
+    //                         Ok(_) => {
+    //                             info!("Node {} was initialized successfully", conf.node_id);
+    //                         }
+    //                         Err(e) => {
+    //                             panic!("openraft init fail,{}", e.to_string());
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //             Err(e) => {
+    //                 panic!("openraft initialized fail,{}", e.to_string());
+    //             }
+    //         }
+    //     }
+
+    //     // wait learn ready
+    //     sleep(Duration::from_secs(10)).await;
+
+    //     for (node_id, node) in nodes {
+    //         if node_id == conf.node_id {
+    //             continue;
+    //         }
+    //         info!("Start adding learner node {}", node_id);
+    //         match raft_node.add_learner(node_id, node, true).await {
+    //             Ok(data) => {
+    //                 info!(
+    //                     "Learner node {} was added successfullys, res:{:?}",
+    //                     node_id, data
+    //                 );
+    //             }
+    //             Err(e) => {
+    //                 error!(
+    //                     "Failed to add the learner node, error message :{}",
+    //                     e.to_string()
+    //                 );
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 pub fn calc_init_node(nodes: &BTreeMap<u64, Node>) -> u64 {
