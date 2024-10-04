@@ -45,9 +45,31 @@ appenders:
             pattern: "{$path}/requests-log-{}.log"
             base: 0
             count: 50
+  raft:
+    kind: rolling_file
+    path: "{$path}/raft.log"
+    encoder:
+        pattern: "{d(%Y-%m-%d %H:%M:%S)} {h({l})} {m}{n}"
+    policy:
+        trigger:
+            kind: size
+            limit: 1 gb
+        roller:
+            kind: fixed_window
+            pattern: "{$path}/raft-{}.log"
+            base: 0
+            count: 50
 
 root:
   level: info
   appenders:
     - stdout
     - server
+
+loggers:
+  openraft:
+    level: info
+    appenders:
+      - stdout
+      - raft
+    additive: false
