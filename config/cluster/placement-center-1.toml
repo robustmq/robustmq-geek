@@ -17,7 +17,7 @@ addr = "127.0.0.1"
 node_id = 2
 grpc_port = 1228
 http_port = 8972
-nodes = { 2 = "127.0.0.1:1228", 3 = "127.0.0.1:1238" }
+nodes = { 2 = "127.0.0.1:1228", 3 = "127.0.0.1:1238", 4 = "127.0.0.1:1248" }
 data_path = "/tmp/placement-center-geek/geek-2"
 
 [log]
