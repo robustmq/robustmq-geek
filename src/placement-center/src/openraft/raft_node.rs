@@ -1,12 +1,13 @@
 use clients::poll::ClientPool;
 use common_base::config::placement_center::placement_center_conf;
-use log::error;
+use log::{error, info};
 use openraft::{Config, Raft};
 use std::collections::BTreeMap;
 use std::fmt::Display;
 use std::path::Path;
 use std::sync::Arc;
 use std::time::Duration;
+use tokio::sync::RwLock;
 use tokio::time::sleep;
 
 use super::network::network::Network;
@@ -54,36 +55,61 @@ pub async fn start_openraft_node(raft_node: Raft<TypeConfig>) {
     let conf = placement_center_conf();
     let mut nodes = BTreeMap::new();
     for (node_id, addr) in conf.nodes.clone() {
+        let mut addr = addr.to_string();
+        addr = addr.replace("\"", "");
         let node = Node {
-            rpc_addr: addr.to_string(),
+            rpc_addr: addr,
             node_id: node_id.parse().unwrap(),
         };
 
         nodes.insert(node.node_id, node);
     }
 
+    info!("Raft Nodes:{:?}", nodes);
     let init_node_id = calc_init_node(&nodes);
-    println!("init_node_id:{}", init_node_id);
-    println!("local_node_id:{}", conf.node_id);
 
-    if let Some(local) = nodes.get(&conf.node_id) {
-        println!("init:{}", local.node_id);
-        let mut init_nodes = BTreeMap::new();
-        init_nodes.insert(local.node_id, local.clone());
-        let _ = raft_node.initialize(init_nodes).await;
-    }
-
-    sleep(Duration::from_secs(10)).await;
-
-    for (node_id, node) in nodes {
-        if node_id == conf.node_id {
-            continue;
+    if init_node_id == conf.node_id {
+        if let Some(local) = nodes.get(&conf.node_id) {
+            info!("Start trying to initialize node:{}", local.node_id);
+            let mut init_nodes = BTreeMap::new();
+            init_nodes.insert(local.node_id, local.clone());
+            match raft_node.is_initialized().await {
+                Ok(flag) => {
+                    info!("Whether nodes should be initialized, flag={}", flag);
+                    if !flag {
+                        match raft_node.initialize(init_nodes).await {
+                            Ok(_) => {
+                                info!("Node {} was initialized successfully", conf.node_id);
+                            }
+                            Err(e) => {
+                                panic!("openraft init fail,{}", e.to_string());
+                            }
+                        }
+                    }
+                }
+                Err(e) => {
+                    panic!("openraft initialized fail,{}", e.to_string());
+                }
+            }
         }
-        println!("add learner:{}", node_id);
-        match raft_node.add_learner(node_id, node, true).await {
-            Ok(data) => {}
-            Err(e) => {
-                error!("addd learner fail, error message: {}", e.to_string());
+        for (node_id, node) in nodes {
+            if node_id == conf.node_id {
+                continue;
+            }
+            info!("Start adding learner node {}", node_id);
+            match raft_node.add_learner(node_id, node, true).await {
+                Ok(data) => {
+                    info!(
+                        "Learner node {} was added successfullys, res:{:?}",
+                        node_id, data
+                    );
+                }
+                Err(e) => {
+                    error!(
+                        "Failed to add the learner node, error message :{}",
+                        e.to_string()
+                    );
+                }
             }
         }
     }
@@ -95,7 +121,9 @@ pub fn calc_init_node(nodes: &BTreeMap<u64, Node>) -> u64 {
     return node_ids.first().unwrap().clone();
 }
 
-pub async fn create_raft_node(client_poll: Arc<ClientPool>) -> Raft<TypeConfig> {
+pub async fn create_raft_node(
+    client_poll: Arc<ClientPool>,
+) -> (Raft<TypeConfig>, Arc<RwLock<BTreeMap<String, String>>>) {
     let config = Config {
         heartbeat_interval: 250,
         election_timeout_min: 299,
@@ -120,5 +148,5 @@ pub async fn create_raft_node(client_poll: Arc<ClientPool>) -> Raft<TypeConfig> 
     .await
     .unwrap();
 
-    return raft;
+    return (raft, kvs);
 }

@@ -73,7 +73,6 @@ impl KvService for GrpcKvServices {
 
         match self.raft_node.client_write(data).await {
             Ok(data) => {
-                println!("{:?}", serialize(&data).unwrap());
                 return Ok(Response::new(CommonReply::default()));
             }
             Err(e) => {
@@ -100,7 +99,6 @@ impl KvService for GrpcKvServices {
 
         match self.raft_node.client_write(data).await {
             Ok(data) => {
-                println!("{:?}", serialize(&data).unwrap());
                 return Ok(Response::new(CommonReply::default()));
             }
             Err(e) => {

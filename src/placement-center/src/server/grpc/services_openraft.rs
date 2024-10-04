@@ -66,7 +66,6 @@ impl OpenRaftService for GrpcOpenRaftServices {
                 return Err(Status::cancelled(e.to_string()));
             }
         };
-
         let mut reply = AppendReply::default();
         reply.value = match serialize(&res) {
             Ok(data) => data,

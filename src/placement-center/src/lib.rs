@@ -68,7 +68,7 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
 
     let client_poll = Arc::new(ClientPool::new(3));
 
-    let openraft_node = create_raft_node(client_poll.clone()).await;
+    let (openraft_node, kvs) = create_raft_node(client_poll.clone()).await;
 
     let raw_stop_sx = stop_sx.clone();
     let tmp_openraft_node = openraft_node.clone();
@@ -91,7 +91,7 @@ pub async fn start_server(stop_sx: broadcast::Sender<bool>) {
 
     let raw_stop_sx = stop_sx.clone();
     tokio::spawn(async move {
-        let state = HttpServerState::new(tmp_openraft_node);
+        let state = HttpServerState::new(tmp_openraft_node, kvs);
         start_http_server(state, raw_stop_sx).await;
     });
 
