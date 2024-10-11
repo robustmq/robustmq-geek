@@ -51,6 +51,7 @@ impl OpenRaftService for GrpcOpenRaftServices {
                 return Err(Status::cancelled(e.to_string()));
             }
         };
+        
         return Ok(Response::new(reply));
     }
 
